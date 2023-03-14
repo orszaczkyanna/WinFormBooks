@@ -30,8 +30,19 @@
         {
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.dgvUsers = new System.Windows.Forms.DataGridView();
+            this.panelButtons = new System.Windows.Forms.Panel();
+            this.groupBoxSearch = new System.Windows.Forms.GroupBox();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.cmbFilter = new System.Windows.Forms.ComboBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnInsertUser = new System.Windows.Forms.Button();
+            this.btnUpdateRole = new System.Windows.Forms.Button();
+            this.btnDeleteUser = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.tableLayoutPanelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
+            this.panelButtons.SuspendLayout();
+            this.groupBoxSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanelMain
@@ -40,12 +51,14 @@
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanelMain.Controls.Add(this.dgvUsers, 0, 0);
+            this.tableLayoutPanelMain.Controls.Add(this.panelButtons, 1, 0);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
+            this.tableLayoutPanelMain.Padding = new System.Windows.Forms.Padding(30);
             this.tableLayoutPanelMain.RowCount = 1;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(604, 621);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(944, 571);
             this.tableLayoutPanelMain.TabIndex = 0;
             // 
             // dgvUsers
@@ -54,26 +67,136 @@
             this.dgvUsers.AllowUserToDeleteRows = false;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvUsers.Location = new System.Drawing.Point(3, 3);
+            this.dgvUsers.Location = new System.Drawing.Point(33, 33);
             this.dgvUsers.Name = "dgvUsers";
             this.dgvUsers.ReadOnly = true;
-            this.dgvUsers.Size = new System.Drawing.Size(326, 615);
+            this.dgvUsers.Size = new System.Drawing.Size(480, 505);
             this.dgvUsers.TabIndex = 0;
+            // 
+            // panelButtons
+            // 
+            this.panelButtons.Controls.Add(this.btnClose);
+            this.panelButtons.Controls.Add(this.btnDeleteUser);
+            this.panelButtons.Controls.Add(this.btnUpdateRole);
+            this.panelButtons.Controls.Add(this.btnInsertUser);
+            this.panelButtons.Controls.Add(this.groupBoxSearch);
+            this.panelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelButtons.Location = new System.Drawing.Point(519, 33);
+            this.panelButtons.Name = "panelButtons";
+            this.panelButtons.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.panelButtons.Size = new System.Drawing.Size(392, 505);
+            this.panelButtons.TabIndex = 1;
+            // 
+            // groupBoxSearch
+            // 
+            this.groupBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxSearch.Controls.Add(this.btnSearch);
+            this.groupBoxSearch.Controls.Add(this.cmbFilter);
+            this.groupBoxSearch.Controls.Add(this.tbSearch);
+            this.groupBoxSearch.Location = new System.Drawing.Point(33, 3);
+            this.groupBoxSearch.Name = "groupBoxSearch";
+            this.groupBoxSearch.Size = new System.Drawing.Size(356, 146);
+            this.groupBoxSearch.TabIndex = 0;
+            this.groupBoxSearch.TabStop = false;
+            this.groupBoxSearch.Text = "Felhasználó keresése";
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSearch.Location = new System.Drawing.Point(6, 25);
+            this.tbSearch.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(344, 26);
+            this.tbSearch.TabIndex = 0;
+            // 
+            // cmbFilter
+            // 
+            this.cmbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbFilter.FormattingEnabled = true;
+            this.cmbFilter.Location = new System.Drawing.Point(6, 64);
+            this.cmbFilter.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.cmbFilter.Name = "cmbFilter";
+            this.cmbFilter.Size = new System.Drawing.Size(344, 28);
+            this.cmbFilter.TabIndex = 1;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Location = new System.Drawing.Point(7, 106);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(343, 28);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Keresés";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            // 
+            // btnInsertUser
+            // 
+            this.btnInsertUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInsertUser.Location = new System.Drawing.Point(33, 178);
+            this.btnInsertUser.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.btnInsertUser.Name = "btnInsertUser";
+            this.btnInsertUser.Size = new System.Drawing.Size(356, 60);
+            this.btnInsertUser.TabIndex = 1;
+            this.btnInsertUser.Text = "Új felhasználó";
+            this.btnInsertUser.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateRole
+            // 
+            this.btnUpdateRole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateRole.Location = new System.Drawing.Point(33, 251);
+            this.btnUpdateRole.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.btnUpdateRole.Name = "btnUpdateRole";
+            this.btnUpdateRole.Size = new System.Drawing.Size(356, 60);
+            this.btnUpdateRole.TabIndex = 2;
+            this.btnUpdateRole.Text = "Jogosultság módosítása";
+            this.btnUpdateRole.UseVisualStyleBackColor = true;
+            // 
+            // btnDeleteUser
+            // 
+            this.btnDeleteUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteUser.Location = new System.Drawing.Point(33, 324);
+            this.btnDeleteUser.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.btnDeleteUser.Name = "btnDeleteUser";
+            this.btnDeleteUser.Size = new System.Drawing.Size(356, 60);
+            this.btnDeleteUser.TabIndex = 3;
+            this.btnDeleteUser.Text = "Felhasználó törlése";
+            this.btnDeleteUser.UseVisualStyleBackColor = true;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Location = new System.Drawing.Point(33, 442);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(356, 60);
+            this.btnClose.TabIndex = 4;
+            this.btnClose.Text = "Bezárás";
+            this.btnClose.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 621);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(944, 571);
             this.Controls.Add(this.tableLayoutPanelMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MinimumSize = new System.Drawing.Size(620, 660);
+            this.MinimumSize = new System.Drawing.Size(620, 610);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.tableLayoutPanelMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
+            this.panelButtons.ResumeLayout(false);
+            this.groupBoxSearch.ResumeLayout(false);
+            this.groupBoxSearch.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -82,6 +205,15 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
         private System.Windows.Forms.DataGridView dgvUsers;
+        private System.Windows.Forms.Panel panelButtons;
+        private System.Windows.Forms.GroupBox groupBoxSearch;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.ComboBox cmbFilter;
+        private System.Windows.Forms.TextBox tbSearch;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnDeleteUser;
+        private System.Windows.Forms.Button btnUpdateRole;
+        private System.Windows.Forms.Button btnInsertUser;
     }
 }
 
