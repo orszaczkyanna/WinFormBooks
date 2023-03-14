@@ -31,14 +31,14 @@
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.dgvUsers = new System.Windows.Forms.DataGridView();
             this.panelButtons = new System.Windows.Forms.Panel();
-            this.groupBoxSearch = new System.Windows.Forms.GroupBox();
-            this.tbSearch = new System.Windows.Forms.TextBox();
-            this.cmbFilter = new System.Windows.Forms.ComboBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.btnInsertUser = new System.Windows.Forms.Button();
-            this.btnUpdateRole = new System.Windows.Forms.Button();
-            this.btnDeleteUser = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.btnDeleteUser = new System.Windows.Forms.Button();
+            this.btnUpdateRole = new System.Windows.Forms.Button();
+            this.btnInsertUser = new System.Windows.Forms.Button();
+            this.groupBoxSearch = new System.Windows.Forms.GroupBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.cmbFilter = new System.Windows.Forms.ComboBox();
+            this.tbSearch = new System.Windows.Forms.TextBox();
             this.tableLayoutPanelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.panelButtons.SuspendLayout();
@@ -72,6 +72,7 @@
             this.dgvUsers.ReadOnly = true;
             this.dgvUsers.Size = new System.Drawing.Size(480, 505);
             this.dgvUsers.TabIndex = 0;
+            this.dgvUsers.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvUsers_ColumnHeaderMouseClick);
             // 
             // panelButtons
             // 
@@ -87,6 +88,54 @@
             this.panelButtons.Size = new System.Drawing.Size(392, 505);
             this.panelButtons.TabIndex = 1;
             // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Location = new System.Drawing.Point(33, 442);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(356, 60);
+            this.btnClose.TabIndex = 4;
+            this.btnClose.Text = "Bezárás";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnDeleteUser
+            // 
+            this.btnDeleteUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteUser.Location = new System.Drawing.Point(33, 324);
+            this.btnDeleteUser.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.btnDeleteUser.Name = "btnDeleteUser";
+            this.btnDeleteUser.Size = new System.Drawing.Size(356, 60);
+            this.btnDeleteUser.TabIndex = 3;
+            this.btnDeleteUser.Text = "Felhasználó törlése";
+            this.btnDeleteUser.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateRole
+            // 
+            this.btnUpdateRole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateRole.Location = new System.Drawing.Point(33, 251);
+            this.btnUpdateRole.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.btnUpdateRole.Name = "btnUpdateRole";
+            this.btnUpdateRole.Size = new System.Drawing.Size(356, 60);
+            this.btnUpdateRole.TabIndex = 2;
+            this.btnUpdateRole.Text = "Jogosultság módosítása";
+            this.btnUpdateRole.UseVisualStyleBackColor = true;
+            // 
+            // btnInsertUser
+            // 
+            this.btnInsertUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInsertUser.Location = new System.Drawing.Point(33, 178);
+            this.btnInsertUser.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.btnInsertUser.Name = "btnInsertUser";
+            this.btnInsertUser.Size = new System.Drawing.Size(356, 60);
+            this.btnInsertUser.TabIndex = 1;
+            this.btnInsertUser.Text = "Új felhasználó";
+            this.btnInsertUser.UseVisualStyleBackColor = true;
+            // 
             // groupBoxSearch
             // 
             this.groupBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -101,15 +150,17 @@
             this.groupBoxSearch.TabStop = false;
             this.groupBoxSearch.Text = "Felhasználó keresése";
             // 
-            // tbSearch
+            // btnSearch
             // 
-            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSearch.Location = new System.Drawing.Point(6, 25);
-            this.tbSearch.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(344, 26);
-            this.tbSearch.TabIndex = 0;
+            this.btnSearch.Location = new System.Drawing.Point(7, 106);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(343, 28);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Keresés";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // cmbFilter
             // 
@@ -122,63 +173,15 @@
             this.cmbFilter.Size = new System.Drawing.Size(344, 28);
             this.cmbFilter.TabIndex = 1;
             // 
-            // btnSearch
+            // tbSearch
             // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(7, 106);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(343, 28);
-            this.btnSearch.TabIndex = 2;
-            this.btnSearch.Text = "Keresés";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            // 
-            // btnInsertUser
-            // 
-            this.btnInsertUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInsertUser.Location = new System.Drawing.Point(33, 178);
-            this.btnInsertUser.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.btnInsertUser.Name = "btnInsertUser";
-            this.btnInsertUser.Size = new System.Drawing.Size(356, 60);
-            this.btnInsertUser.TabIndex = 1;
-            this.btnInsertUser.Text = "Új felhasználó";
-            this.btnInsertUser.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdateRole
-            // 
-            this.btnUpdateRole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdateRole.Location = new System.Drawing.Point(33, 251);
-            this.btnUpdateRole.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.btnUpdateRole.Name = "btnUpdateRole";
-            this.btnUpdateRole.Size = new System.Drawing.Size(356, 60);
-            this.btnUpdateRole.TabIndex = 2;
-            this.btnUpdateRole.Text = "Jogosultság módosítása";
-            this.btnUpdateRole.UseVisualStyleBackColor = true;
-            // 
-            // btnDeleteUser
-            // 
-            this.btnDeleteUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteUser.Location = new System.Drawing.Point(33, 324);
-            this.btnDeleteUser.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.btnDeleteUser.Name = "btnDeleteUser";
-            this.btnDeleteUser.Size = new System.Drawing.Size(356, 60);
-            this.btnDeleteUser.TabIndex = 3;
-            this.btnDeleteUser.Text = "Felhasználó törlése";
-            this.btnDeleteUser.UseVisualStyleBackColor = true;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(33, 442);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(356, 60);
-            this.btnClose.TabIndex = 4;
-            this.btnClose.Text = "Bezárás";
-            this.btnClose.UseVisualStyleBackColor = true;
+            this.tbSearch.Location = new System.Drawing.Point(6, 25);
+            this.tbSearch.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(344, 26);
+            this.tbSearch.TabIndex = 0;
             // 
             // MainForm
             // 

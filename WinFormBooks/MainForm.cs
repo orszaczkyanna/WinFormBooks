@@ -19,12 +19,18 @@ namespace WinFormBooks
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //dgvUsers.DataSource = Program.database.UsersList();
+            // --- cmbFilter ComboBox elemeinek megadása ---
+            cmbFilter.Items.AddRange(new string[] { "mind", "admin", "felhasználó" });
+            cmbFilter.SelectedIndex = 0;
 
+            // --- dgvUsers DataGridView ---
             DataGridViewCreate(); // Táblázat megrajzolása
-            DataGridViewUpdate(); // Táblázat feltöltése/adatok frissítése
+            //DataGridViewUpdate(Program.database.UsersList());
+            DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole())); // Táblázat feltöltése/adatok frissítése
 
         }
+
+
 
         private void DataGridViewCreate()
         {
@@ -41,6 +47,7 @@ namespace WinFormBooks
                 colId.HeaderText = "id";
                 colId.CellTemplate = new DataGridViewTextBoxCell();
                 colId.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                colId.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             }
             dgvUsers.Columns.Add(colId);
 
@@ -64,10 +71,24 @@ namespace WinFormBooks
             dgvUsers.Columns.Add(colRole);
         }
 
-        private void DataGridViewUpdate()
+        //private void DataGridViewUpdate()
+        //{
+        //    dgvUsers.Rows.Clear();
+        //    foreach (User user in Program.database.UsersList())
+        //    {
+        //        int index = dgvUsers.Rows.Add();
+        //        DataGridViewRow newRow = dgvUsers.Rows[index];
+
+        //        newRow.Cells["id"].Value = user.Id;
+        //        newRow.Cells["username"].Value = user.Username;
+        //        newRow.Cells["role"].Value = user.Role;
+        //    }
+        //}
+
+        private void DataGridViewUpdate(List<User> UsersList)
         {
             dgvUsers.Rows.Clear();
-            foreach (User user in Program.database.UsersList())
+            foreach (User user in UsersList)
             {
                 int index = dgvUsers.Rows.Add();
                 DataGridViewRow newRow = dgvUsers.Rows[index];
@@ -79,5 +100,35 @@ namespace WinFormBooks
         }
 
 
+        private string SelectedRole()
+        {
+            switch (cmbFilter.SelectedIndex)
+            {
+                case 1:
+                    return "admin";
+                    //break;
+                case 2:
+                    return "user";
+                    //break;
+                default:
+                    return string.Empty;
+                    //break;
+            }
+        }
+
+        private void dgvUsers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            this.dgvUsers.Sort(this.dgvUsers.Columns[e.ColumnIndex], ListSortDirection.Ascending);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole()));
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
