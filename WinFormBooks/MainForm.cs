@@ -116,6 +116,7 @@ namespace WinFormBooks
             }
         }
 
+
         private void dgvUsers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             this.dgvUsers.Sort(this.dgvUsers.Columns[e.ColumnIndex], ListSortDirection.Ascending);
@@ -126,9 +127,26 @@ namespace WinFormBooks
             DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole()));
         }
 
+        private void btnDeleteUser_Click(object sender, EventArgs e)
+        {
+            if (dgvUsers.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Nincs kiválasztott felhasználó!");
+            }
+            else
+            {
+                DataGridViewRow selectedRow = dgvUsers.SelectedRows[0];
+                string selectedUsersId = selectedRow.Cells["id"].Value.ToString();
+                Program.database.DeleteUser(selectedUsersId);
+                DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole()));
+            }
+        }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+
     }
 }

@@ -111,6 +111,7 @@
             this.btnDeleteUser.TabIndex = 3;
             this.btnDeleteUser.Text = "Felhasználó törlése";
             this.btnDeleteUser.UseVisualStyleBackColor = true;
+            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click);
             // 
             // btnUpdateRole
             // 

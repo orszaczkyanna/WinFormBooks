@@ -93,7 +93,7 @@ namespace WinFormBooks
         }
 
 
-        // Metódus, ami visszaadja a kiválasztott felhasználókat
+        // Metódus, ami visszaadja a keresett felhasználókat; ha nincs keresés, az összeset
         public List<User> SelectedUsersList(string usernameSearch, string roleSearch)
         {
             List<User> users = new List<User>();
@@ -142,6 +142,40 @@ namespace WinFormBooks
 
             return users;
         }
+
+
+
+        // Felhasználó törlése
+        public void DeleteUser(string id)
+        {
+            try
+            {
+                connection.Open();
+                cmd.Parameters.Clear();
+                cmd.CommandText = "DELETE FROM users WHERE id = @id;";
+                cmd.Parameters.AddWithValue("@id", id);
+
+                int affectedRows = cmd.ExecuteNonQuery();
+
+                if (affectedRows > 0)
+                {
+                    MessageBox.Show("Felhasználó törlése sikeres!");
+                }
+                else
+                {
+                    MessageBox.Show("Felhasználó törlése sikertelen!");
+                }
+
+
+                connection.Close();
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
 
     }
 }
