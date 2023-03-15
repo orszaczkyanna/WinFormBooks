@@ -24,9 +24,14 @@ namespace WinFormBooks
             cmbFilter.SelectedIndex = 0;
 
             // --- dgvUsers DataGridView ---
-            DataGridViewCreate(); // Táblázat megrajzolása
+            // Táblázat megrajzolása
+            DataGridViewCreate();
+
+
+            // Táblázat feltöltése/adatok frissítése
             //DataGridViewUpdate(Program.database.UsersList());
-            DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole())); // Táblázat feltöltése/adatok frissítése
+            //DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole()));
+            DataGridViewUpdatePublic();
 
         }
 
@@ -116,6 +121,14 @@ namespace WinFormBooks
             }
         }
 
+        public void DataGridViewUpdatePublic()
+        {
+            string usernameSearch = tbSearch.Text;
+            string roleSearch = SelectedRole();
+            List<User> UsersList = Program.database.SelectedUsersList(usernameSearch, roleSearch);
+            DataGridViewUpdate(UsersList);
+        }
+
 
         private void dgvUsers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -124,7 +137,15 @@ namespace WinFormBooks
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole()));
+            //DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole()));
+            DataGridViewUpdatePublic();
+        }
+
+
+        private void btnUpdateRole_Click(object sender, EventArgs e)
+        {
+            FormUpdateRole formUpdateRole = new FormUpdateRole();
+            formUpdateRole.ShowDialog();
         }
 
         private void btnDeleteUser_Click(object sender, EventArgs e)
@@ -138,7 +159,8 @@ namespace WinFormBooks
                 DataGridViewRow selectedRow = dgvUsers.SelectedRows[0];
                 string selectedUsersId = selectedRow.Cells["id"].Value.ToString();
                 Program.database.DeleteUser(selectedUsersId);
-                DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole()));
+                //DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole()));
+                DataGridViewUpdatePublic();
             }
         }
 

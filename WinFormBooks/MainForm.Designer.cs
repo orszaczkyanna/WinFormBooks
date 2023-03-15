@@ -124,6 +124,7 @@
             this.btnUpdateRole.TabIndex = 2;
             this.btnUpdateRole.Text = "Jogosultság módosítása";
             this.btnUpdateRole.UseVisualStyleBackColor = true;
+            this.btnUpdateRole.Click += new System.EventHandler(this.btnUpdateRole_Click);
             // 
             // btnInsertUser
             // 
@@ -208,7 +209,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
-        private System.Windows.Forms.DataGridView dgvUsers;
         private System.Windows.Forms.Panel panelButtons;
         private System.Windows.Forms.GroupBox groupBoxSearch;
         private System.Windows.Forms.Button btnSearch;
@@ -218,6 +218,7 @@
         private System.Windows.Forms.Button btnDeleteUser;
         private System.Windows.Forms.Button btnUpdateRole;
         private System.Windows.Forms.Button btnInsertUser;
+        public System.Windows.Forms.DataGridView dgvUsers;
     }
 }
 

@@ -107,7 +107,7 @@ namespace WinFormBooks
                     while (dr.Read())
                     {
 
-                        // user átnevezése felhasználóra
+                        // felhasználó és admin átnevezése
                         string role = dr.GetString("role");
                         string roleRename;
                         if (role == "user")
@@ -116,7 +116,7 @@ namespace WinFormBooks
                         }
                         else
                         {
-                            roleRename = role;
+                            roleRename = "admin";
                         }
 
                         // új felhasználó hozzáadása a listához
@@ -145,6 +145,38 @@ namespace WinFormBooks
 
 
 
+        // Jogosultság módosítása
+        public void UpdateRole(string role, string id)
+        {
+            try
+            {
+                connection.Open();
+                cmd.Parameters.Clear();
+                cmd.CommandText = "UPDATE users SET role = @role WHERE id = @id;";
+                cmd.Parameters.AddWithValue("@role", role);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                int affectedRows = cmd.ExecuteNonQuery();
+                if (affectedRows == 1)
+                {
+                    MessageBox.Show("Jogosultság módosítása sikeres!");
+                }
+                else
+                {
+                    MessageBox.Show("Jogosultság módosítása sikertelen!");
+                }
+
+                connection.Close();
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+
         // Felhasználó törlése
         public void DeleteUser(string id)
         {
@@ -157,7 +189,7 @@ namespace WinFormBooks
 
                 int affectedRows = cmd.ExecuteNonQuery();
 
-                if (affectedRows > 0)
+                if (affectedRows == 1)
                 {
                     MessageBox.Show("Felhasználó törlése sikeres!");
                 }

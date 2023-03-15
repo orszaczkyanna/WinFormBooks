@@ -61,6 +61,7 @@
             this.btnUpdate.TabIndex = 4;
             this.btnUpdate.Text = "Módosítás";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // cmbRoleUp
             // 
@@ -117,7 +118,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormUpdateRole";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Jogosultság módosítása";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormUpdateRole_FormClosing);
+            this.Load += new System.EventHandler(this.FormUpdateRole_Load);
             this.panelUpdateRole.ResumeLayout(false);
             this.panelUpdateRole.PerformLayout();
             this.ResumeLayout(false);
