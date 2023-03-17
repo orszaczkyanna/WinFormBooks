@@ -15,6 +15,8 @@ namespace WinFormBooks
         public static MainForm mainForm = null;
         public static Database database = new Database();
 
+        public static string globalMessageBoxCaption = "Books";
+
 
         [STAThread]
         static void Main()

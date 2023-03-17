@@ -35,14 +35,14 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message + "\n\nNem sikerült csatlakozni az adatbázishoz!\nA program leáll!");
+                MessageBox.Show(ex.Message + "\n\nNem sikerült csatlakozni az adatbázishoz!\nA program leáll!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
         }
 
 
         // Metódus, ami visszaadja az összes felhasználót tartalmazó listát
-        public List<User> UsersList()
+        /* public List<User> UsersList()
         {
 
             List<User> users = new List<User>();
@@ -91,9 +91,10 @@ namespace WinFormBooks
 
             return users;
         }
+        */
 
 
-        // Metódus, ami visszaadja a keresett felhasználókat; ha nincs keresés, az összeset
+        // Metódus, ami visszaadja a keresett felhasználókat; ha nincs keresés, az összeset        
         public List<User> SelectedUsersList(string usernameSearch, string roleSearch)
         {
             List<User> users = new List<User>();
@@ -136,7 +137,7 @@ namespace WinFormBooks
 
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message + "\n\nFelhasználók lekérdezése sikertelen!\nA program leáll!");
+                MessageBox.Show(ex.Message + "\n\nFelhasználók lekérdezése sikertelen!\nA program leáll!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
 
@@ -157,14 +158,16 @@ namespace WinFormBooks
                 cmd.Parameters.AddWithValue("@id", id);
 
                 int affectedRows = cmd.ExecuteNonQuery();
-                if (affectedRows == 1)
-                {
-                    MessageBox.Show("Jogosultság módosítása sikeres!");
-                }
-                else
-                {
-                    MessageBox.Show("Jogosultság módosítása sikertelen!");
-                }
+                IsSuccessfulMessageBox(affectedRows, "Jogosultság módosítása");
+
+                //if (affectedRows == 1)
+                //{
+                //    MessageBox.Show("Jogosultság módosítása sikeres!");
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Jogosultság módosítása sikertelen!");
+                //}
 
                 connection.Close();
 
@@ -174,6 +177,8 @@ namespace WinFormBooks
                 MessageBox.Show(ex.Message);
             }
         }
+
+
 
 
 
@@ -188,16 +193,7 @@ namespace WinFormBooks
                 cmd.Parameters.AddWithValue("@id", id);
 
                 int affectedRows = cmd.ExecuteNonQuery();
-
-                if (affectedRows == 1)
-                {
-                    MessageBox.Show("Felhasználó törlése sikeres!");
-                }
-                else
-                {
-                    MessageBox.Show("Felhasználó törlése sikertelen!");
-                }
-
+                IsSuccessfulMessageBox(affectedRows, "Felhasználó törlése");
 
                 connection.Close();
 
@@ -207,6 +203,21 @@ namespace WinFormBooks
                 MessageBox.Show(ex.Message);
             }
         }
+
+
+
+        private void IsSuccessfulMessageBox(int affectedRows, string message)
+        {
+            if (affectedRows == 1)
+            {
+                MessageBox.Show($"{message} sikeres!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show($"{message} sikertelen!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
     }

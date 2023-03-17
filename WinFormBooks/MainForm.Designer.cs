@@ -36,6 +36,7 @@
             this.btnUpdateRole = new System.Windows.Forms.Button();
             this.btnInsertUser = new System.Windows.Forms.Button();
             this.groupBoxSearch = new System.Windows.Forms.GroupBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.cmbFilter = new System.Windows.Forms.ComboBox();
             this.tbSearch = new System.Windows.Forms.TextBox();
@@ -142,6 +143,7 @@
             // 
             this.groupBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxSearch.Controls.Add(this.btnRefresh);
             this.groupBoxSearch.Controls.Add(this.btnSearch);
             this.groupBoxSearch.Controls.Add(this.cmbFilter);
             this.groupBoxSearch.Controls.Add(this.tbSearch);
@@ -152,13 +154,24 @@
             this.groupBoxSearch.TabStop = false;
             this.groupBoxSearch.Text = "Felhasználó keresése";
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefresh.Image = global::WinFormBooks.Properties.Resources.LucaBurgio_refresh_double14;
+            this.btnRefresh.Location = new System.Drawing.Point(322, 106);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(28, 28);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.Location = new System.Drawing.Point(7, 106);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(343, 28);
+            this.btnSearch.Size = new System.Drawing.Size(309, 28);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Keresés";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -174,6 +187,7 @@
             this.cmbFilter.Name = "cmbFilter";
             this.cmbFilter.Size = new System.Drawing.Size(344, 28);
             this.cmbFilter.TabIndex = 1;
+            this.cmbFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbFilter_KeyDown);
             // 
             // tbSearch
             // 
@@ -184,6 +198,7 @@
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(344, 26);
             this.tbSearch.TabIndex = 0;
+            this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
             // 
             // MainForm
             // 
@@ -219,6 +234,7 @@
         private System.Windows.Forms.Button btnUpdateRole;
         private System.Windows.Forms.Button btnInsertUser;
         public System.Windows.Forms.DataGridView dgvUsers;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
 

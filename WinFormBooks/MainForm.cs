@@ -43,6 +43,9 @@ namespace WinFormBooks
             dgvUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvUsers.MultiSelect = false;
+            dgvUsers.RowTemplate.Height = 45; // sormagasság
+            dgvUsers.RowHeadersWidth = 30; // sor header szélesség
+            dgvUsers.ColumnHeadersDefaultCellStyle.Font = new Font(dgvUsers.ColumnHeadersDefaultCellStyle.Font, FontStyle.Bold); // félkövér fejléc
 
             // Oszlopok tulajdonságai
             // 1. oszlop - ID
@@ -76,19 +79,20 @@ namespace WinFormBooks
             dgvUsers.Columns.Add(colRole);
         }
 
-        //private void DataGridViewUpdate()
-        //{
-        //    dgvUsers.Rows.Clear();
-        //    foreach (User user in Program.database.UsersList())
-        //    {
-        //        int index = dgvUsers.Rows.Add();
-        //        DataGridViewRow newRow = dgvUsers.Rows[index];
+        /*private void DataGridViewUpdate()
+        {
+            dgvUsers.Rows.Clear();
+            foreach (User user in Program.database.UsersList())
+            {
+                int index = dgvUsers.Rows.Add();
+                DataGridViewRow newRow = dgvUsers.Rows[index];
 
-        //        newRow.Cells["id"].Value = user.Id;
-        //        newRow.Cells["username"].Value = user.Username;
-        //        newRow.Cells["role"].Value = user.Role;
-        //    }
-        //}
+                newRow.Cells["id"].Value = user.Id;
+                newRow.Cells["username"].Value = user.Username;
+                newRow.Cells["role"].Value = user.Role;
+            }
+        }
+        */
 
         private void DataGridViewUpdate(List<User> UsersList)
         {
@@ -137,30 +141,68 @@ namespace WinFormBooks
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            //DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole()));
             DataGridViewUpdatePublic();
+        }
+
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearch.PerformClick();
+            }
+        }
+
+        private void cmbFilter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearch.PerformClick();
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            tbSearch.Text = string.Empty;
+            cmbFilter.SelectedIndex = 0;
+            List<User> UsersList = Program.database.SelectedUsersList(tbSearch.Text, string.Empty);
+            DataGridViewUpdate(UsersList);
         }
 
 
         private void btnUpdateRole_Click(object sender, EventArgs e)
         {
-            FormUpdateRole formUpdateRole = new FormUpdateRole();
-            formUpdateRole.ShowDialog();
+
+            if (dgvUsers.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Nincs kiválasztott felhasználó!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                FormUpdateRole formUpdateRole = new FormUpdateRole();
+                formUpdateRole.ShowDialog();
+            }
+            
+
         }
 
         private void btnDeleteUser_Click(object sender, EventArgs e)
         {
             if (dgvUsers.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Nincs kiválasztott felhasználó!");
+                MessageBox.Show("Nincs kiválasztott felhasználó!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                DataGridViewRow selectedRow = dgvUsers.SelectedRows[0];
-                string selectedUsersId = selectedRow.Cells["id"].Value.ToString();
-                Program.database.DeleteUser(selectedUsersId);
-                //DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole()));
-                DataGridViewUpdatePublic();
+                
+                DialogResult result = MessageBox.Show("Biztosan törli a felhasználót?", Program.globalMessageBoxCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result.Equals(DialogResult.Yes))
+                {
+                    DataGridViewRow selectedRow = dgvUsers.SelectedRows[0];
+                    string selectedUsersId = selectedRow.Cells["id"].Value.ToString();
+                    Program.database.DeleteUser(selectedUsersId);
+                    DataGridViewUpdatePublic();
+                }
+
             }
         }
 

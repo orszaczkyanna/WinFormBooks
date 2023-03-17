@@ -120,7 +120,6 @@
             this.Name = "FormUpdateRole";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Jogosultság módosítása";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormUpdateRole_FormClosing);
             this.Load += new System.EventHandler(this.FormUpdateRole_Load);
             this.panelUpdateRole.ResumeLayout(false);
             this.panelUpdateRole.PerformLayout();
