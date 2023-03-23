@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.panelInsertUser = new System.Windows.Forms.Panel();
-            this.lblUsername = new System.Windows.Forms.Label();
-            this.tbUsernameIn = new System.Windows.Forms.TextBox();
-            this.tbPasswordIn1 = new System.Windows.Forms.TextBox();
-            this.lblPassword1 = new System.Windows.Forms.Label();
+            this.btnInsert = new System.Windows.Forms.Button();
+            this.cmbRoleIn = new System.Windows.Forms.ComboBox();
+            this.lblRole = new System.Windows.Forms.Label();
             this.tbPasswordIn2 = new System.Windows.Forms.TextBox();
             this.lblPassword2 = new System.Windows.Forms.Label();
-            this.lblRole = new System.Windows.Forms.Label();
-            this.cmbRoleIn = new System.Windows.Forms.ComboBox();
-            this.btnInsert = new System.Windows.Forms.Button();
+            this.tbPasswordIn1 = new System.Windows.Forms.TextBox();
+            this.lblPassword1 = new System.Windows.Forms.Label();
+            this.tbUsernameIn = new System.Windows.Forms.TextBox();
+            this.lblUsername = new System.Windows.Forms.Label();
             this.panelInsertUser.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,71 +59,28 @@
             this.panelInsertUser.Size = new System.Drawing.Size(314, 541);
             this.panelInsertUser.TabIndex = 0;
             // 
-            // lblUsername
+            // btnInsert
             // 
-            this.lblUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnInsert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(33, 33);
-            this.lblUsername.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
-            this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(120, 20);
-            this.lblUsername.TabIndex = 0;
-            this.lblUsername.Text = "Felhasználónév";
+            this.btnInsert.Location = new System.Drawing.Point(33, 448);
+            this.btnInsert.Name = "btnInsert";
+            this.btnInsert.Size = new System.Drawing.Size(248, 60);
+            this.btnInsert.TabIndex = 8;
+            this.btnInsert.Text = "Hozzáadás";
+            this.btnInsert.UseVisualStyleBackColor = true;
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
-            // tbUsernameIn
+            // cmbRoleIn
             // 
-            this.tbUsernameIn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cmbRoleIn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbUsernameIn.Location = new System.Drawing.Point(33, 62);
-            this.tbUsernameIn.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
-            this.tbUsernameIn.Name = "tbUsernameIn";
-            this.tbUsernameIn.Size = new System.Drawing.Size(248, 26);
-            this.tbUsernameIn.TabIndex = 1;
-            // 
-            // tbPasswordIn1
-            // 
-            this.tbPasswordIn1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPasswordIn1.Location = new System.Drawing.Point(33, 150);
-            this.tbPasswordIn1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
-            this.tbPasswordIn1.Name = "tbPasswordIn1";
-            this.tbPasswordIn1.Size = new System.Drawing.Size(248, 26);
-            this.tbPasswordIn1.TabIndex = 3;
-            // 
-            // lblPassword1
-            // 
-            this.lblPassword1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPassword1.AutoSize = true;
-            this.lblPassword1.Location = new System.Drawing.Point(33, 121);
-            this.lblPassword1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
-            this.lblPassword1.Name = "lblPassword1";
-            this.lblPassword1.Size = new System.Drawing.Size(54, 20);
-            this.lblPassword1.TabIndex = 2;
-            this.lblPassword1.Text = "Jelszó";
-            // 
-            // tbPasswordIn2
-            // 
-            this.tbPasswordIn2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPasswordIn2.Location = new System.Drawing.Point(33, 238);
-            this.tbPasswordIn2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
-            this.tbPasswordIn2.Name = "tbPasswordIn2";
-            this.tbPasswordIn2.Size = new System.Drawing.Size(248, 26);
-            this.tbPasswordIn2.TabIndex = 5;
-            // 
-            // lblPassword2
-            // 
-            this.lblPassword2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPassword2.AutoSize = true;
-            this.lblPassword2.Location = new System.Drawing.Point(33, 209);
-            this.lblPassword2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
-            this.lblPassword2.Name = "lblPassword2";
-            this.lblPassword2.Size = new System.Drawing.Size(96, 20);
-            this.lblPassword2.TabIndex = 4;
-            this.lblPassword2.Text = "Jelszó ismét";
+            this.cmbRoleIn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRoleIn.FormattingEnabled = true;
+            this.cmbRoleIn.Location = new System.Drawing.Point(33, 326);
+            this.cmbRoleIn.Name = "cmbRoleIn";
+            this.cmbRoleIn.Size = new System.Drawing.Size(248, 28);
+            this.cmbRoleIn.TabIndex = 7;
             // 
             // lblRole
             // 
@@ -137,27 +94,73 @@
             this.lblRole.TabIndex = 6;
             this.lblRole.Text = "Jogosultság";
             // 
-            // cmbRoleIn
+            // tbPasswordIn2
             // 
-            this.cmbRoleIn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbPasswordIn2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbRoleIn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbRoleIn.FormattingEnabled = true;
-            this.cmbRoleIn.Location = new System.Drawing.Point(33, 326);
-            this.cmbRoleIn.Name = "cmbRoleIn";
-            this.cmbRoleIn.Size = new System.Drawing.Size(248, 28);
-            this.cmbRoleIn.TabIndex = 7;
+            this.tbPasswordIn2.Location = new System.Drawing.Point(33, 238);
+            this.tbPasswordIn2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
+            this.tbPasswordIn2.Name = "tbPasswordIn2";
+            this.tbPasswordIn2.Size = new System.Drawing.Size(248, 26);
+            this.tbPasswordIn2.TabIndex = 5;
+            this.tbPasswordIn2.UseSystemPasswordChar = true;
             // 
-            // btnInsert
+            // lblPassword2
             // 
-            this.btnInsert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblPassword2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInsert.Location = new System.Drawing.Point(33, 448);
-            this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(248, 60);
-            this.btnInsert.TabIndex = 8;
-            this.btnInsert.Text = "Hozzáadás";
-            this.btnInsert.UseVisualStyleBackColor = true;
+            this.lblPassword2.AutoSize = true;
+            this.lblPassword2.Location = new System.Drawing.Point(33, 209);
+            this.lblPassword2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
+            this.lblPassword2.Name = "lblPassword2";
+            this.lblPassword2.Size = new System.Drawing.Size(96, 20);
+            this.lblPassword2.TabIndex = 4;
+            this.lblPassword2.Text = "Jelszó ismét";
+            // 
+            // tbPasswordIn1
+            // 
+            this.tbPasswordIn1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPasswordIn1.Location = new System.Drawing.Point(33, 150);
+            this.tbPasswordIn1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
+            this.tbPasswordIn1.Name = "tbPasswordIn1";
+            this.tbPasswordIn1.Size = new System.Drawing.Size(248, 26);
+            this.tbPasswordIn1.TabIndex = 3;
+            this.tbPasswordIn1.UseSystemPasswordChar = true;
+            // 
+            // lblPassword1
+            // 
+            this.lblPassword1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPassword1.AutoSize = true;
+            this.lblPassword1.Location = new System.Drawing.Point(33, 121);
+            this.lblPassword1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
+            this.lblPassword1.Name = "lblPassword1";
+            this.lblPassword1.Size = new System.Drawing.Size(54, 20);
+            this.lblPassword1.TabIndex = 2;
+            this.lblPassword1.Text = "Jelszó";
+            // 
+            // tbUsernameIn
+            // 
+            this.tbUsernameIn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbUsernameIn.Location = new System.Drawing.Point(33, 62);
+            this.tbUsernameIn.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
+            this.tbUsernameIn.Name = "tbUsernameIn";
+            this.tbUsernameIn.Size = new System.Drawing.Size(248, 26);
+            this.tbUsernameIn.TabIndex = 1;
+            // 
+            // lblUsername
+            // 
+            this.lblUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Location = new System.Drawing.Point(33, 33);
+            this.lblUsername.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(120, 20);
+            this.lblUsername.TabIndex = 0;
+            this.lblUsername.Text = "Felhasználónév";
             // 
             // FormInsertUser
             // 
@@ -170,6 +173,7 @@
             this.Name = "FormInsertUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Új felhasználó";
+            this.Load += new System.EventHandler(this.FormInsertUser_Load);
             this.panelInsertUser.ResumeLayout(false);
             this.panelInsertUser.PerformLayout();
             this.ResumeLayout(false);

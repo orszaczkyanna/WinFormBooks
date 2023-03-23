@@ -45,7 +45,7 @@ namespace WinFormBooks
             dgvUsers.MultiSelect = false;
             dgvUsers.RowTemplate.Height = 45; // sormagasság
             dgvUsers.RowHeadersWidth = 30; // sor header szélesség
-            dgvUsers.ColumnHeadersDefaultCellStyle.Font = new Font(dgvUsers.ColumnHeadersDefaultCellStyle.Font, FontStyle.Bold); // félkövér fejléc
+            //dgvUsers.ColumnHeadersDefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold); // félkövér fejléc
 
             // Oszlopok tulajdonságai
             // 1. oszlop - ID
@@ -168,6 +168,11 @@ namespace WinFormBooks
             DataGridViewUpdate(UsersList);
         }
 
+        private void btnInsertUser_Click(object sender, EventArgs e)
+        {
+            FormInsertUser formInsertUser = new FormInsertUser();
+            formInsertUser.ShowDialog();
+        }
 
         private void btnUpdateRole_Click(object sender, EventArgs e)
         {

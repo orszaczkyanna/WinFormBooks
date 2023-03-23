@@ -138,6 +138,7 @@
             this.btnInsertUser.TabIndex = 1;
             this.btnInsertUser.Text = "Új felhasználó";
             this.btnInsertUser.UseVisualStyleBackColor = true;
+            this.btnInsertUser.Click += new System.EventHandler(this.btnInsertUser_Click);
             // 
             // groupBoxSearch
             // 

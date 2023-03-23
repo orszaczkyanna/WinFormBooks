@@ -93,7 +93,6 @@ namespace WinFormBooks
         }
         */
 
-
         // Metódus, ami visszaadja a keresett felhasználókat; ha nincs keresés, az összeset        
         public List<User> SelectedUsersList(string usernameSearch, string roleSearch)
         {
@@ -144,7 +143,55 @@ namespace WinFormBooks
             return users;
         }
 
+        // Metódus, ami visszaadja az összes felhasználónevet
+        public List<string> UsernamesList()
+        {
+            List<string> usernames = new List<string>();
+            cmd.CommandText = "SELECT username FROM users;";
 
+            try
+            {
+                connection.Open();
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        usernames.Add(dr.GetString("username"));
+                    }
+                }
+                connection.Close();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return usernames;
+        }
+
+
+
+        // Új felhasználó hozzáadása
+        public void InsertUser(string username, string password, string role)
+        {
+            try
+            {
+                connection.Open();
+                cmd.Parameters.Clear();
+                cmd.CommandText = "INSERT INTO users(id, username, password, role) VALUES (NULL,@Username,@Password,@Role);";
+                cmd.Parameters.AddWithValue("Username", username);
+                cmd.Parameters.AddWithValue("Password", password);
+                cmd.Parameters.AddWithValue("Role", role);
+                int affectedRows = cmd.ExecuteNonQuery();
+                IsSuccessfulMessageBox(affectedRows, "Felhasználó felvétele");
+                connection.Close();
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         // Jogosultság módosítása
         public void UpdateRole(string role, string id)
@@ -160,15 +207,6 @@ namespace WinFormBooks
                 int affectedRows = cmd.ExecuteNonQuery();
                 IsSuccessfulMessageBox(affectedRows, "Jogosultság módosítása");
 
-                //if (affectedRows == 1)
-                //{
-                //    MessageBox.Show("Jogosultság módosítása sikeres!");
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Jogosultság módosítása sikertelen!");
-                //}
-
                 connection.Close();
 
             }
@@ -177,10 +215,6 @@ namespace WinFormBooks
                 MessageBox.Show(ex.Message);
             }
         }
-
-
-
-
 
         // Felhasználó törlése
         public void DeleteUser(string id)
@@ -205,7 +239,7 @@ namespace WinFormBooks
         }
 
 
-
+        // Sikeres volt-e a művelet
         private void IsSuccessfulMessageBox(int affectedRows, string message)
         {
             if (affectedRows == 1)
