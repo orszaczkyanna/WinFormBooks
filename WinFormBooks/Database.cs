@@ -41,6 +41,8 @@ namespace WinFormBooks
         }
 
 
+        // --------------------- USERS ------------------------
+
         // Metódus, ami visszaadja az összes felhasználót tartalmazó listát
         /* public List<User> UsersList()
         {
@@ -217,7 +219,7 @@ namespace WinFormBooks
         }
 
         // Felhasználó törlése
-        public void DeleteUser(string id)
+        /*public void DeleteUser(string id)
         {
             try
             {
@@ -236,7 +238,79 @@ namespace WinFormBooks
             {
                 MessageBox.Show(ex.Message);
             }
+        }*/
+
+
+
+        // --------------------- BOOKS ------------------------
+
+        // Metódus, ami visszaadja a keresett könyveket; ha nincs keresés, az összeset   
+        public List<Book> SelectedBooksList(string title, string author, string type, string finished)
+        {
+            List<Book> books = new List<Book>();
+            cmd.CommandText = $"SELECT id, cim, szerzo, tipus, olvasas FROM book WHERE cim LIKE \"%{title}%\" AND szerzo LIKE \"%{author}%\" AND tipus LIKE \"%{type}%\" AND olvasas LIKE \"%{finished}%\";";
+
+            try
+            {
+                connection.Open();
+                using(MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Book newBook = new Book(
+                            dr.GetUInt32("id"),
+                            dr.GetString("cim"),
+                            dr.GetString("szerzo"),
+                            dr.GetString("tipus"),
+                            dr.GetString("olvasas")
+                        );
+                        books.Add(newBook);
+                    }
+                }
+                connection.Close();
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message + "\n\nKönyvek lekérdezése sikertelen!\nA program leáll!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+            }
+
+            return books;
         }
+
+
+        // Könyv adatainak módosítása
+        public void UpdateBook(Book book)
+        {
+            try
+            {
+                connection.Open();
+                cmd.Parameters.Clear();
+                cmd.CommandText = "UPDATE book SET cim=@title, szerzo=@author, tipus=@type, olvasas=@finished WHERE id=@id";
+                
+                cmd.Parameters.AddWithValue("@title", book.Title);
+                cmd.Parameters.AddWithValue("@author", book.Author);
+                cmd.Parameters.AddWithValue("@type", book.Type);
+                cmd.Parameters.AddWithValue("@finished", book.Finished);
+                cmd.Parameters.AddWithValue("@id", book.Id);
+
+                int affectedRows = cmd.ExecuteNonQuery();
+                IsSuccessfulMessageBox(affectedRows, "Könyv adatainak módosítása");
+
+                connection.Close();
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+
+
+        // --------------------- USERS & BOOKS ------------------------
 
 
         // Sikeres volt-e a művelet
@@ -253,6 +327,27 @@ namespace WinFormBooks
         }
 
 
+        // Felhasználó vagy könyv törlése
+        public void DeleteUserOrBook(string id, string tableName, string typeName)
+        {
+            try
+            {
+                connection.Open();
+                cmd.Parameters.Clear();
+                cmd.CommandText = $"DELETE FROM {tableName} WHERE id = @id;";
+                cmd.Parameters.AddWithValue("@id", id);
+
+                int affectedRows = cmd.ExecuteNonQuery();
+                IsSuccessfulMessageBox(affectedRows, $"{typeName} törlése");
+
+                connection.Close();
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
     }
 }

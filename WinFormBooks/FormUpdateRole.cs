@@ -79,7 +79,7 @@ namespace WinFormBooks
             else
             {
                 Program.database.UpdateRole(updatedRoleToSend, selectedUserId);
-                Program.mainForm.DataGridViewUpdatePublic();
+                Program.mainForm.DataGridViewUpdateSearch();
                 this.Close();
             }
 

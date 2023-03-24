@@ -23,15 +23,9 @@ namespace WinFormBooks
             cmbFilter.Items.AddRange(new string[] { "mind", "admin", "felhasználó" });
             cmbFilter.SelectedIndex = 0;
 
-            // --- dgvUsers DataGridView ---
-            // Táblázat megrajzolása
-            DataGridViewCreate();
-
-
-            // Táblázat feltöltése/adatok frissítése
-            //DataGridViewUpdate(Program.database.UsersList());
-            //DataGridViewUpdate(Program.database.SelectedUsersList(tbSearch.Text, SelectedRole()));
-            DataGridViewUpdatePublic();
+            // --- dgvUsers DataGridView ---            
+            DataGridViewCreate(); // Táblázat megrajzolása            
+            DataGridViewUpdateSearch(); // Táblázat feltöltése/adatok frissítése
 
         }
 
@@ -109,7 +103,7 @@ namespace WinFormBooks
         }
 
 
-        private string SelectedRole()
+        /*private string SelectedRole()
         {
             switch (cmbFilter.SelectedIndex)
             {
@@ -123,14 +117,17 @@ namespace WinFormBooks
                     return string.Empty;
                     //break;
             }
-        }
+        }*/
 
-        public void DataGridViewUpdatePublic()
+
+        public void DataGridViewUpdateSearch()
         {
             string usernameSearch = tbSearch.Text;
-            string roleSearch = SelectedRole();
-            List<User> UsersList = Program.database.SelectedUsersList(usernameSearch, roleSearch);
-            DataGridViewUpdate(UsersList);
+            //string roleSearch = SelectedRole();
+            string roleFilter = ComboBoxSelectedItem(cmbFilter.SelectedIndex, "admin", "user");
+
+            List<User> usersList = Program.database.SelectedUsersList(usernameSearch, roleFilter);
+            DataGridViewUpdate(usersList);
         }
 
 
@@ -139,33 +136,40 @@ namespace WinFormBooks
             this.dgvUsers.Sort(this.dgvUsers.Columns[e.ColumnIndex], ListSortDirection.Ascending);
         }
 
+        // Felhasználó(k) keresése keresés gombbal, vagy enterrel
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            DataGridViewUpdatePublic();
+            DataGridViewUpdateSearch();
         }
 
         private void tbSearch_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnSearch.PerformClick();
-            }
+            EnterSearch(btnSearch, e);
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    btnSearch.PerformClick();
+            //}
         }
 
         private void cmbFilter_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnSearch.PerformClick();
-            }
+            EnterSearch(btnSearch, e);
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    btnSearch.PerformClick();
+            //}
+
         }
 
+
+        // Táblázat tartalmának frissítése: töltse be az összes felhasználót
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             tbSearch.Text = string.Empty;
             cmbFilter.SelectedIndex = 0;
-            List<User> UsersList = Program.database.SelectedUsersList(tbSearch.Text, string.Empty);
-            DataGridViewUpdate(UsersList);
+            //List<User> UsersList = Program.database.SelectedUsersList(tbSearch.Text, string.Empty);
+            //DataGridViewUpdate(UsersList);
+            DataGridViewUpdateSearch();
         }
 
         private void btnInsertUser_Click(object sender, EventArgs e)
@@ -204,17 +208,54 @@ namespace WinFormBooks
                 {
                     DataGridViewRow selectedRow = dgvUsers.SelectedRows[0];
                     string selectedUsersId = selectedRow.Cells["id"].Value.ToString();
-                    Program.database.DeleteUser(selectedUsersId);
-                    DataGridViewUpdatePublic();
+                    //Program.database.DeleteUser(selectedUsersId);
+                    Program.database.DeleteUserOrBook(selectedUsersId, "users", "Felhasználó");
+                    DataGridViewUpdateSearch();
                 }
 
             }
+        }
+
+        private void btnBooks_Click(object sender, EventArgs e)
+        {
+            Program.formBooks.Show();
+            this.Hide();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+
+
+        // ---------------------- Publikus Metódusok -------------------------
+        // --- amiket a felhasználó keresés, és a könyv keresés is használ ---
+
+        // Megadott index alapján visszaadja a ComboBox megfelelő értékét
+        public string ComboBoxSelectedItem(int index, string firstValue, string secondValue)
+        {
+            switch (index)
+            {
+                case 1:
+                    return firstValue;
+                case 2:
+                    return secondValue;
+                default:
+                    return string.Empty;
+            }
+        }
+
+
+        // Enter leütésére hajtsa végre a megadott gomb (keresés) kattintás eseményét
+        public void EnterSearch(Button btn, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn.PerformClick();
+            }
+        }
+
 
 
     }

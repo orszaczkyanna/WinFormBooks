@@ -41,7 +41,7 @@ namespace WinFormBooks
             {
                 hashedPassword = BCrypt.Net.BCrypt.HashPassword(password1, salt);
                 Program.database.InsertUser(username, hashedPassword, role);
-                Program.mainForm.DataGridViewUpdatePublic();
+                Program.mainForm.DataGridViewUpdateSearch();
                 this.Close();
             }
         }

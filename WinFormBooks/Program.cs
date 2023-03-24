@@ -13,6 +13,7 @@ namespace WinFormBooks
         /// </summary>
 
         public static MainForm mainForm = null;
+        public static FormBooks formBooks = null;
         public static Database database = new Database();
 
         public static string globalMessageBoxCaption = "Books";
@@ -24,6 +25,7 @@ namespace WinFormBooks
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             mainForm = new MainForm();
+            formBooks = new FormBooks();
             Application.Run(mainForm);
 
         }
