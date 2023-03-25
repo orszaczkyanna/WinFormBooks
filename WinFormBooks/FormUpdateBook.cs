@@ -96,23 +96,22 @@ namespace WinFormBooks
         {
             if (book.Title.Equals(""))
             {
-                MessageBox.Show("Add meg a címet!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("Add meg a címet!");
                 return false;
             }
             if (book.Author.Equals(""))
             {
-                MessageBox.Show("Add meg a szerzőt!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("Add meg a szerzőt!");
                 return false;
             }
             if (!book.Type.Equals("nyomtatott") && !book.Type.Equals("ebook"))
             {
-                MessageBox.Show("Add meg a típust!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                MessageBox.Show(book.Type);
+                BooksMessageBox.Warning("Add meg a típust!");
                 return false;
             }
             if (!book.Finished.Equals("igen") && !book.Finished.Equals("nem"))
             {
-                MessageBox.Show("Add meg, hogy olvastad-e már a könyvet!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("Add meg, hogy olvastad-e már a könyvet!");
                 return false;
             }
 
@@ -125,13 +124,16 @@ namespace WinFormBooks
 
             if (selectedBook.Title.Equals(updatedBook.Title) && selectedBook.Author.Equals(updatedBook.Author) && selectedBook.Type.Equals(updatedBook.Type) && selectedBook.Finished.Equals(updatedBook.Finished))
             {
-                MessageBox.Show("Nem történt módosítás!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("Nem történt módosítás!");
                 return false;
             }
 
             return true;
         }
 
-
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

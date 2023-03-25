@@ -74,7 +74,7 @@ namespace WinFormBooks
             // Ha igen, a módosítás történjen meg
             if (selectedUserRole.Equals(updatedRoleToSend))
             {
-                MessageBox.Show("Nem történt módosítás!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("Nem történt módosítás!");
             }
             else
             {
@@ -85,10 +85,10 @@ namespace WinFormBooks
 
         }
 
-        /*private void FormUpdateRole_FormClosing(object sender, FormClosingEventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            // Az ablak bezáródásakor frissüljön a DataGridView tartalma
-            Program.mainForm.DataGridViewUpdatePublic();
-        }*/
+            this.Close();
+        }
+
     }
 }

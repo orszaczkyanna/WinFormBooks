@@ -35,7 +35,7 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message + "\n\nNem sikerült csatlakozni az adatbázishoz!\nA program leáll!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BooksMessageBox.Error(ex.Message + "\n\nNem sikerült csatlakozni az adatbázishoz!\nA program leáll!");
                 Environment.Exit(0);
             }
         }
@@ -43,57 +43,6 @@ namespace WinFormBooks
 
         // --------------------- USERS ------------------------
 
-        // Metódus, ami visszaadja az összes felhasználót tartalmazó listát
-        /* public List<User> UsersList()
-        {
-
-            List<User> users = new List<User>();
-            cmd.CommandText = "SELECT id, username, role FROM users;";
-
-            try
-            {
-                connection.Open();
-                using (MySqlDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-
-                        // user átnevezése felhasználóra
-                        string role = dr.GetString("role");
-                        string roleRename;
-                        if (role == "user")
-                        {
-                            roleRename = "felhasználó";
-                        }
-                        else
-                        {
-                            roleRename = role;
-                        }
-
-                        // új felhasználó hozzáadása a listához
-                        User newUser = new User(
-                            dr.GetUInt32("id"),
-                            dr.GetString("username"),
-                            roleRename
-                        );
-
-                        users.Add(newUser);
-
-
-                    }
-                }
-                connection.Close();
-            }
-
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message + "\n\nFelhasználók lekérdezése sikertelen!\nA program leáll!");
-                Environment.Exit(0);
-            }
-
-            return users;
-        }
-        */
 
         // Metódus, ami visszaadja a keresett felhasználókat; ha nincs keresés, az összeset        
         public List<User> SelectedUsersList(string usernameSearch, string roleSearch)
@@ -138,7 +87,7 @@ namespace WinFormBooks
 
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message + "\n\nFelhasználók lekérdezése sikertelen!\nA program leáll!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BooksMessageBox.Error(ex.Message + "\n\nFelhasználók lekérdezése sikertelen!\nA program leáll!");
                 Environment.Exit(0);
             }
 
@@ -165,7 +114,7 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                BooksMessageBox.Error(ex.Message);
             }
 
             return usernames;
@@ -191,7 +140,7 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                BooksMessageBox.Error(ex.Message);
             }
         }
 
@@ -214,31 +163,9 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                BooksMessageBox.Error(ex.Message);
             }
         }
-
-        // Felhasználó törlése
-        /*public void DeleteUser(string id)
-        {
-            try
-            {
-                connection.Open();
-                cmd.Parameters.Clear();
-                cmd.CommandText = "DELETE FROM users WHERE id = @id;";
-                cmd.Parameters.AddWithValue("@id", id);
-
-                int affectedRows = cmd.ExecuteNonQuery();
-                IsSuccessfulMessageBox(affectedRows, "Felhasználó törlése");
-
-                connection.Close();
-
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }*/
 
 
 
@@ -272,7 +199,7 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message + "\n\nKönyvek lekérdezése sikertelen!\nA program leáll!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BooksMessageBox.Error(ex.Message + "\n\nKönyvek lekérdezése sikertelen!\nA program leáll!");
                 Environment.Exit(0);
             }
 
@@ -303,7 +230,8 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                BooksMessageBox.Error(ex.Message);
+
             }
         }
 
@@ -318,11 +246,11 @@ namespace WinFormBooks
         {
             if (affectedRows == 1)
             {
-                MessageBox.Show($"{message} sikeres!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                BooksMessageBox.Information($"{message} sikeres!");
             }
             else
             {
-                MessageBox.Show($"{message} sikertelen!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BooksMessageBox.Error($"{message} sikertelen!");
             }
         }
 
@@ -345,7 +273,7 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                BooksMessageBox.Error(ex.Message);
             }
         }
 

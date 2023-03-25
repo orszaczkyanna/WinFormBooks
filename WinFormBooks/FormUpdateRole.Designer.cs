@@ -34,11 +34,13 @@
             this.lblRole = new System.Windows.Forms.Label();
             this.tbUsernameUp = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.panelUpdateRole.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelUpdateRole
             // 
+            this.panelUpdateRole.Controls.Add(this.btnCancel);
             this.panelUpdateRole.Controls.Add(this.btnUpdate);
             this.panelUpdateRole.Controls.Add(this.cmbRoleUp);
             this.panelUpdateRole.Controls.Add(this.lblRole);
@@ -57,7 +59,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpdate.Location = new System.Drawing.Point(33, 258);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(248, 60);
+            this.btnUpdate.Size = new System.Drawing.Size(147, 60);
             this.btnUpdate.TabIndex = 4;
             this.btnUpdate.Text = "Módosítás";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -109,6 +111,17 @@
             this.lblUsername.TabIndex = 0;
             this.lblUsername.Text = "Felhasználónév";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(186, 258);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(95, 60);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Mégse";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // FormUpdateRole
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -135,5 +148,6 @@
         private System.Windows.Forms.Label lblRole;
         private System.Windows.Forms.TextBox tbUsernameUp;
         private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

@@ -73,21 +73,6 @@ namespace WinFormBooks
             dgvUsers.Columns.Add(colRole);
         }
 
-        /*private void DataGridViewUpdate()
-        {
-            dgvUsers.Rows.Clear();
-            foreach (User user in Program.database.UsersList())
-            {
-                int index = dgvUsers.Rows.Add();
-                DataGridViewRow newRow = dgvUsers.Rows[index];
-
-                newRow.Cells["id"].Value = user.Id;
-                newRow.Cells["username"].Value = user.Username;
-                newRow.Cells["role"].Value = user.Role;
-            }
-        }
-        */
-
         private void DataGridViewUpdate(List<User> UsersList)
         {
             dgvUsers.Rows.Clear();
@@ -103,27 +88,9 @@ namespace WinFormBooks
         }
 
 
-        /*private string SelectedRole()
-        {
-            switch (cmbFilter.SelectedIndex)
-            {
-                case 1:
-                    return "admin";
-                    //break;
-                case 2:
-                    return "user";
-                    //break;
-                default:
-                    return string.Empty;
-                    //break;
-            }
-        }*/
-
-
         public void DataGridViewUpdateSearch()
         {
             string usernameSearch = tbSearch.Text;
-            //string roleSearch = SelectedRole();
             string roleFilter = ComboBoxSelectedItem(cmbFilter.SelectedIndex, "admin", "user");
 
             List<User> usersList = Program.database.SelectedUsersList(usernameSearch, roleFilter);
@@ -145,20 +112,11 @@ namespace WinFormBooks
         private void tbSearch_KeyDown(object sender, KeyEventArgs e)
         {
             EnterSearch(btnSearch, e);
-            //if (e.KeyCode == Keys.Enter)
-            //{
-            //    btnSearch.PerformClick();
-            //}
         }
 
         private void cmbFilter_KeyDown(object sender, KeyEventArgs e)
         {
             EnterSearch(btnSearch, e);
-            //if (e.KeyCode == Keys.Enter)
-            //{
-            //    btnSearch.PerformClick();
-            //}
-
         }
 
 
@@ -167,8 +125,6 @@ namespace WinFormBooks
         {
             tbSearch.Text = string.Empty;
             cmbFilter.SelectedIndex = 0;
-            //List<User> UsersList = Program.database.SelectedUsersList(tbSearch.Text, string.Empty);
-            //DataGridViewUpdate(UsersList);
             DataGridViewUpdateSearch();
         }
 
@@ -183,7 +139,7 @@ namespace WinFormBooks
 
             if (dgvUsers.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Nincs kiválasztott felhasználó!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("Nincs kiválasztott felhasználó!");
             }
             else
             {
@@ -198,17 +154,15 @@ namespace WinFormBooks
         {
             if (dgvUsers.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Nincs kiválasztott felhasználó!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("Nincs kiválasztott felhasználó!");
             }
             else
             {
-                
-                DialogResult result = MessageBox.Show("Biztosan törli a felhasználót?", Program.globalMessageBoxCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = BooksMessageBox.YesNo("a felhasználót");
                 if (result.Equals(DialogResult.Yes))
                 {
                     DataGridViewRow selectedRow = dgvUsers.SelectedRows[0];
                     string selectedUsersId = selectedRow.Cells["id"].Value.ToString();
-                    //Program.database.DeleteUser(selectedUsersId);
                     Program.database.DeleteUserOrBook(selectedUsersId, "users", "Felhasználó");
                     DataGridViewUpdateSearch();
                 }

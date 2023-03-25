@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Book.cs" />
+    <Compile Include="BooksMessageBox.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="FormBooks.cs">
       <SubType>Form</SubType>

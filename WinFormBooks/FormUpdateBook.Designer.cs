@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelUpdateBook = new System.Windows.Forms.Panel();
+            this.cmbTypeUp = new System.Windows.Forms.ComboBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.cmbFinishedUp = new System.Windows.Forms.ComboBox();
             this.lblFinished = new System.Windows.Forms.Label();
@@ -37,12 +38,13 @@
             this.lblAuthor = new System.Windows.Forms.Label();
             this.tbTitleUp = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.cmbTypeUp = new System.Windows.Forms.ComboBox();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.panelUpdateBook.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelUpdateBook
             // 
+            this.panelUpdateBook.Controls.Add(this.btnCancel);
             this.panelUpdateBook.Controls.Add(this.cmbTypeUp);
             this.panelUpdateBook.Controls.Add(this.btnUpdate);
             this.panelUpdateBook.Controls.Add(this.cmbFinishedUp);
@@ -59,13 +61,24 @@
             this.panelUpdateBook.Size = new System.Drawing.Size(444, 541);
             this.panelUpdateBook.TabIndex = 1;
             // 
+            // cmbTypeUp
+            // 
+            this.cmbTypeUp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbTypeUp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTypeUp.FormattingEnabled = true;
+            this.cmbTypeUp.Location = new System.Drawing.Point(33, 238);
+            this.cmbTypeUp.Name = "cmbTypeUp";
+            this.cmbTypeUp.Size = new System.Drawing.Size(378, 28);
+            this.cmbTypeUp.TabIndex = 5;
+            // 
             // btnUpdate
             // 
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpdate.Location = new System.Drawing.Point(33, 448);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(378, 60);
+            this.btnUpdate.Size = new System.Drawing.Size(277, 60);
             this.btnUpdate.TabIndex = 8;
             this.btnUpdate.Text = "Módosítás";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -150,16 +163,16 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Cím";
             // 
-            // cmbTypeUp
+            // btnCancel
             // 
-            this.cmbTypeUp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbTypeUp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTypeUp.FormattingEnabled = true;
-            this.cmbTypeUp.Location = new System.Drawing.Point(33, 238);
-            this.cmbTypeUp.Name = "cmbTypeUp";
-            this.cmbTypeUp.Size = new System.Drawing.Size(378, 28);
-            this.cmbTypeUp.TabIndex = 5;
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(316, 448);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(95, 60);
+            this.btnCancel.TabIndex = 9;
+            this.btnCancel.Text = "Mégse";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // FormUpdateBook
             // 
@@ -190,5 +203,6 @@
         private System.Windows.Forms.TextBox tbTitleUp;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.ComboBox cmbTypeUp;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

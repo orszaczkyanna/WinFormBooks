@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -68,7 +69,7 @@ namespace WinFormBooks
             if (username == "" || password1 == "" || password2 == "")
             {
                 result = false;
-                MessageBox.Show("Tölts ki minden mezőt!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("Tölts ki minden mezőt!");
             }
 
             return result;
@@ -85,7 +86,7 @@ namespace WinFormBooks
                 if (newUsername == username)
                 {
                     result = false;
-                    MessageBox.Show("A felhasználónév már foglalt!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    BooksMessageBox.Warning("A felhasználónév már foglalt!");
                 }
             }
             return result;
@@ -101,7 +102,7 @@ namespace WinFormBooks
             }
             else
             {
-                MessageBox.Show("A felhasználónév minimum 3 karakterből álljon!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("A felhasználónév minimum 3 karakterből álljon!");
             }
             return result;
 
@@ -117,7 +118,7 @@ namespace WinFormBooks
             }
             else
             {
-                MessageBox.Show("A felhasználónév csak a következőket tartalmazhatja:\naz angol abc kis- és nagybetűi, számok, pont, kötőjel és aláhúzásjel.", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("A felhasználónév csak a következőket tartalmazhatja:\naz angol abc kis- és nagybetűi, számok, pont, kötőjel és aláhúzásjel.");
             }
 
             return result;
@@ -133,7 +134,7 @@ namespace WinFormBooks
             }
             else
             {
-                MessageBox.Show("A jelszó legalább 8 karakter hosszú legyen,\ntartalmazzon kis- és nagybetűt, számot és speciális karaktert!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("A jelszó legalább 8 karakter hosszú legyen,\ntartalmazzon kis- és nagybetűt, számot és speciális karaktert!");
             }
 
             return result;
@@ -149,7 +150,7 @@ namespace WinFormBooks
             }
             else
             {
-                MessageBox.Show("A jelszavak nem egyeznek!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.Warning("A jelszavak nem egyeznek!");
             }
             return result;
         }

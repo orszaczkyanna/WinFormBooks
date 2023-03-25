@@ -167,7 +167,7 @@ namespace WinFormBooks
         {
             if (dgvBooks.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Nincs kiválasztott könyv!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.WarningNoSelected("könyv");
             }
             else
             {
@@ -181,12 +181,13 @@ namespace WinFormBooks
             
             if (dgvBooks.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Nincs kiválasztott könyv!", Program.globalMessageBoxCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                BooksMessageBox.WarningNoSelected("könyv");
             }
             else
             {
 
-                DialogResult result = MessageBox.Show("Biztosan törli a könyvet?", Program.globalMessageBoxCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = BooksMessageBox.YesNo("a könyvet");
+
                 if (result.Equals(DialogResult.Yes))
                 {
                     DataGridViewRow selectedRow = dgvBooks.SelectedRows[0];
