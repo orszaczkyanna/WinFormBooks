@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInsertUser));
             this.panelInsertUser = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnInsert = new System.Windows.Forms.Button();
             this.cmbRoleIn = new System.Windows.Forms.ComboBox();
             this.lblRole = new System.Windows.Forms.Label();
@@ -43,6 +45,7 @@
             // 
             // panelInsertUser
             // 
+            this.panelInsertUser.Controls.Add(this.btnCancel);
             this.panelInsertUser.Controls.Add(this.btnInsert);
             this.panelInsertUser.Controls.Add(this.cmbRoleIn);
             this.panelInsertUser.Controls.Add(this.lblRole);
@@ -59,23 +62,42 @@
             this.panelInsertUser.Size = new System.Drawing.Size(314, 541);
             this.panelInsertUser.TabIndex = 0;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.White;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Location = new System.Drawing.Point(186, 448);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(95, 60);
+            this.btnCancel.TabIndex = 9;
+            this.btnCancel.Text = "Mégse";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // btnInsert
             // 
             this.btnInsert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInsert.BackColor = System.Drawing.Color.White;
+            this.btnInsert.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInsert.Location = new System.Drawing.Point(33, 448);
             this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(248, 60);
+            this.btnInsert.Size = new System.Drawing.Size(147, 60);
             this.btnInsert.TabIndex = 8;
             this.btnInsert.Text = "Hozzáadás";
-            this.btnInsert.UseVisualStyleBackColor = true;
+            this.btnInsert.UseVisualStyleBackColor = false;
             this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
             // cmbRoleIn
             // 
             this.cmbRoleIn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbRoleIn.BackColor = System.Drawing.Color.White;
             this.cmbRoleIn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRoleIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbRoleIn.FormattingEnabled = true;
             this.cmbRoleIn.Location = new System.Drawing.Point(33, 326);
             this.cmbRoleIn.Name = "cmbRoleIn";
@@ -98,6 +120,7 @@
             // 
             this.tbPasswordIn2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPasswordIn2.BackColor = System.Drawing.Color.White;
             this.tbPasswordIn2.Location = new System.Drawing.Point(33, 238);
             this.tbPasswordIn2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             this.tbPasswordIn2.Name = "tbPasswordIn2";
@@ -121,6 +144,7 @@
             // 
             this.tbPasswordIn1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPasswordIn1.BackColor = System.Drawing.Color.White;
             this.tbPasswordIn1.Location = new System.Drawing.Point(33, 150);
             this.tbPasswordIn1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             this.tbPasswordIn1.Name = "tbPasswordIn1";
@@ -144,6 +168,7 @@
             // 
             this.tbUsernameIn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbUsernameIn.BackColor = System.Drawing.Color.White;
             this.tbUsernameIn.Location = new System.Drawing.Point(33, 62);
             this.tbUsernameIn.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             this.tbUsernameIn.Name = "tbUsernameIn";
@@ -169,6 +194,7 @@
             this.Controls.Add(this.panelInsertUser);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormInsertUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -192,5 +218,6 @@
         private System.Windows.Forms.Label lblPassword1;
         private System.Windows.Forms.TextBox tbUsernameIn;
         private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

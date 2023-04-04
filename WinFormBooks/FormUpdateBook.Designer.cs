@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormUpdateBook));
             this.panelUpdateBook = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.cmbTypeUp = new System.Windows.Forms.ComboBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.cmbFinishedUp = new System.Windows.Forms.ComboBox();
@@ -38,7 +40,6 @@
             this.lblAuthor = new System.Windows.Forms.Label();
             this.tbTitleUp = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.panelUpdateBook.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,11 +62,27 @@
             this.panelUpdateBook.Size = new System.Drawing.Size(444, 541);
             this.panelUpdateBook.TabIndex = 1;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.White;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Location = new System.Drawing.Point(316, 448);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(95, 60);
+            this.btnCancel.TabIndex = 9;
+            this.btnCancel.Text = "Mégse";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // cmbTypeUp
             // 
             this.cmbTypeUp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbTypeUp.BackColor = System.Drawing.Color.White;
             this.cmbTypeUp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTypeUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbTypeUp.FormattingEnabled = true;
             this.cmbTypeUp.Location = new System.Drawing.Point(33, 238);
             this.cmbTypeUp.Name = "cmbTypeUp";
@@ -76,19 +93,24 @@
             // 
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdate.BackColor = System.Drawing.Color.White;
+            this.btnUpdate.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Location = new System.Drawing.Point(33, 448);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(277, 60);
             this.btnUpdate.TabIndex = 8;
             this.btnUpdate.Text = "Módosítás";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // cmbFinishedUp
             // 
             this.cmbFinishedUp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbFinishedUp.BackColor = System.Drawing.Color.White;
             this.cmbFinishedUp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFinishedUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbFinishedUp.FormattingEnabled = true;
             this.cmbFinishedUp.Location = new System.Drawing.Point(33, 326);
             this.cmbFinishedUp.Name = "cmbFinishedUp";
@@ -123,6 +145,7 @@
             // 
             this.tbAuthorUp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAuthorUp.BackColor = System.Drawing.Color.White;
             this.tbAuthorUp.Location = new System.Drawing.Point(33, 150);
             this.tbAuthorUp.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             this.tbAuthorUp.Name = "tbAuthorUp";
@@ -145,6 +168,7 @@
             // 
             this.tbTitleUp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbTitleUp.BackColor = System.Drawing.Color.White;
             this.tbTitleUp.Location = new System.Drawing.Point(33, 62);
             this.tbTitleUp.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             this.tbTitleUp.Name = "tbTitleUp";
@@ -163,23 +187,13 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Cím";
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(316, 448);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(95, 60);
-            this.btnCancel.TabIndex = 9;
-            this.btnCancel.Text = "Mégse";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // FormUpdateBook
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(444, 541);
             this.Controls.Add(this.panelUpdateBook);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(330, 580);
             this.Name = "FormUpdateBook";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

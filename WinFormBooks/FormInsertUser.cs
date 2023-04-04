@@ -38,7 +38,7 @@ namespace WinFormBooks
             string role = RoleToSend(cmbRoleIn.SelectedIndex);
 
             // Új felhasználó felvétele
-            if (FieldsFilled(username, password1, password2) && UsernameMinimumLength(username) && UsernameIsSimple(username) && UsernameIsAvailable(username) && PasswordIsComplex(password1) && PasswordMatch(password1, password2))
+            if (FieldsAreFilled(username, password1, password2, role) && UsernameMinimumLength(username) && UsernameIsSimple(username) && UsernameIsAvailable(username) && PasswordIsComplex(password1) && PasswordMatch(password1, password2))
             {
                 hashedPassword = BCrypt.Net.BCrypt.HashPassword(password1, salt);
                 Program.database.InsertUser(username, hashedPassword, role);
@@ -63,10 +63,10 @@ namespace WinFormBooks
         }
 
         // Ellenőrzés: a mezők ki vannak-e töltve
-        private bool FieldsFilled(string username, string password1, string password2)
+        private bool FieldsAreFilled(string username, string password1, string password2, string role)
         {
             bool result = true;
-            if (username == "" || password1 == "" || password2 == "")
+            if (username == "" || password1 == "" || password2 == "" || (!role.Equals("admin") && !role.Equals("user")))
             {
                 result = false;
                 BooksMessageBox.Warning("Tölts ki minden mezőt!");
@@ -155,9 +155,9 @@ namespace WinFormBooks
             return result;
         }
 
-        
-
-
-
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

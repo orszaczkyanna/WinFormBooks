@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormUpdateRole));
             this.panelUpdateRole = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.cmbRoleUp = new System.Windows.Forms.ComboBox();
             this.lblRole = new System.Windows.Forms.Label();
             this.tbUsernameUp = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.panelUpdateRole.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,23 +54,42 @@
             this.panelUpdateRole.Size = new System.Drawing.Size(314, 351);
             this.panelUpdateRole.TabIndex = 1;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.White;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Location = new System.Drawing.Point(186, 258);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(95, 60);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Mégse";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // btnUpdate
             // 
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdate.BackColor = System.Drawing.Color.White;
+            this.btnUpdate.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Location = new System.Drawing.Point(33, 258);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(147, 60);
             this.btnUpdate.TabIndex = 4;
             this.btnUpdate.Text = "Módosítás";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // cmbRoleUp
             // 
             this.cmbRoleUp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbRoleUp.BackColor = System.Drawing.Color.White;
             this.cmbRoleUp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRoleUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbRoleUp.FormattingEnabled = true;
             this.cmbRoleUp.Location = new System.Drawing.Point(33, 150);
             this.cmbRoleUp.Name = "cmbRoleUp";
@@ -111,17 +131,6 @@
             this.lblUsername.TabIndex = 0;
             this.lblUsername.Text = "Felhasználónév";
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(186, 258);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(95, 60);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Mégse";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // FormUpdateRole
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -129,6 +138,7 @@
             this.Controls.Add(this.panelUpdateRole);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormUpdateRole";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

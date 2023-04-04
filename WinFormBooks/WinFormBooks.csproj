@@ -162,5 +162,14 @@
   <ItemGroup>
     <None Include="Resources\LucaBurgio-refresh-double14.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-update.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

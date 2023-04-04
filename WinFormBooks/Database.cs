@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using static Mysqlx.Notice.Warning.Types;
 
 namespace WinFormBooks
 {
@@ -35,6 +36,7 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 BooksMessageBox.Error(ex.Message + "\n\nNem sikerült csatlakozni az adatbázishoz!\nA program leáll!");
                 Environment.Exit(0);
             }
@@ -48,7 +50,7 @@ namespace WinFormBooks
         public List<User> SelectedUsersList(string usernameSearch, string roleSearch)
         {
             List<User> users = new List<User>();
-            cmd.CommandText = $"SELECT id, username, role FROM users WHERE username LIKE \"%{usernameSearch}%\" AND role LIKE \"%{roleSearch}%\";";
+            cmd.CommandText = $"SELECT userid, username, role FROM users WHERE username LIKE \"%{usernameSearch}%\" AND role LIKE \"%{roleSearch}%\";";
 
             try
             {
@@ -72,7 +74,7 @@ namespace WinFormBooks
 
                         // új felhasználó hozzáadása a listához
                         User newUser = new User(
-                            dr.GetUInt32("id"),
+                            dr.GetUInt32("userid"),
                             dr.GetString("username"),
                             roleRename
                         );
@@ -87,6 +89,7 @@ namespace WinFormBooks
 
             catch (MySqlException ex)
             {
+                connection.Close();
                 BooksMessageBox.Error(ex.Message + "\n\nFelhasználók lekérdezése sikertelen!\nA program leáll!");
                 Environment.Exit(0);
             }
@@ -114,6 +117,7 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 BooksMessageBox.Error(ex.Message);
             }
 
@@ -129,7 +133,7 @@ namespace WinFormBooks
             {
                 connection.Open();
                 cmd.Parameters.Clear();
-                cmd.CommandText = "INSERT INTO users(id, username, password, role) VALUES (NULL,@Username,@Password,@Role);";
+                cmd.CommandText = "INSERT INTO users(userid, username, password, role) VALUES (NULL,@Username,@Password,@Role);";
                 cmd.Parameters.AddWithValue("Username", username);
                 cmd.Parameters.AddWithValue("Password", password);
                 cmd.Parameters.AddWithValue("Role", role);
@@ -140,6 +144,7 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 BooksMessageBox.Error(ex.Message);
             }
         }
@@ -151,7 +156,7 @@ namespace WinFormBooks
             {
                 connection.Open();
                 cmd.Parameters.Clear();
-                cmd.CommandText = "UPDATE users SET role = @role WHERE id = @id;";
+                cmd.CommandText = "UPDATE users SET role = @role WHERE userid = @id;";
                 cmd.Parameters.AddWithValue("@role", role);
                 cmd.Parameters.AddWithValue("@id", id);
 
@@ -163,6 +168,7 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 BooksMessageBox.Error(ex.Message);
             }
         }
@@ -175,7 +181,7 @@ namespace WinFormBooks
         public List<Book> SelectedBooksList(string title, string author, string type, string finished)
         {
             List<Book> books = new List<Book>();
-            cmd.CommandText = $"SELECT id, cim, szerzo, tipus, olvasas FROM book WHERE cim LIKE \"%{title}%\" AND szerzo LIKE \"%{author}%\" AND tipus LIKE \"%{type}%\" AND olvasas LIKE \"%{finished}%\";";
+            cmd.CommandText = $"SELECT bookid, cim, szerzo, tipus, olvasas FROM book WHERE cim LIKE \"%{title}%\" AND szerzo LIKE \"%{author}%\" AND tipus LIKE \"%{type}%\" AND olvasas LIKE \"%{finished}%\";";
 
             try
             {
@@ -185,7 +191,7 @@ namespace WinFormBooks
                     while (dr.Read())
                     {
                         Book newBook = new Book(
-                            dr.GetUInt32("id"),
+                            dr.GetUInt32("bookid"),
                             dr.GetString("cim"),
                             dr.GetString("szerzo"),
                             dr.GetString("tipus"),
@@ -199,6 +205,7 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 BooksMessageBox.Error(ex.Message + "\n\nKönyvek lekérdezése sikertelen!\nA program leáll!");
                 Environment.Exit(0);
             }
@@ -214,7 +221,7 @@ namespace WinFormBooks
             {
                 connection.Open();
                 cmd.Parameters.Clear();
-                cmd.CommandText = "UPDATE book SET cim=@title, szerzo=@author, tipus=@type, olvasas=@finished WHERE id=@id";
+                cmd.CommandText = "UPDATE book SET cim=@title, szerzo=@author, tipus=@type, olvasas=@finished WHERE bookid=@id";
                 
                 cmd.Parameters.AddWithValue("@title", book.Title);
                 cmd.Parameters.AddWithValue("@author", book.Author);
@@ -230,6 +237,7 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 BooksMessageBox.Error(ex.Message);
 
             }
@@ -256,13 +264,13 @@ namespace WinFormBooks
 
 
         // Felhasználó vagy könyv törlése
-        public void DeleteUserOrBook(string id, string tableName, string typeName)
+        public void DeleteUserOrBook(string id, string tableName, string typeName, string idFieldName)
         {
             try
             {
                 connection.Open();
                 cmd.Parameters.Clear();
-                cmd.CommandText = $"DELETE FROM {tableName} WHERE id = @id;";
+                cmd.CommandText = $"DELETE FROM {tableName} WHERE {idFieldName} = @id;";
                 cmd.Parameters.AddWithValue("@id", id);
 
                 int affectedRows = cmd.ExecuteNonQuery();
@@ -273,7 +281,24 @@ namespace WinFormBooks
             }
             catch (MySqlException ex)
             {
-                BooksMessageBox.Error(ex.Message);
+                connection.Close();  
+
+                switch (ex.Number)
+                {
+                    case 1451:
+                        if (typeName.Equals("Könyv"))
+                        {
+                            BooksMessageBox.Error("A könyv nem törölhető, mivel kölcsönben van.");
+                        }
+                        else
+                        {
+                            BooksMessageBox.Error("A felhasználó nem törölhető, mivel kölcsönvett könyv van nála.");
+                        }                       
+                        break;
+                    default:
+                        BooksMessageBox.Error(ex.Message);
+                        break;
+                }
             }
         }
 

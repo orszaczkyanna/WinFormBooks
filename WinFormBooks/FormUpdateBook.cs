@@ -17,10 +17,6 @@ namespace WinFormBooks
         // Kiválasztott könyv
         static DataGridViewRow selectedRow;
         uint selectedBookId;
-        //string selectedBookTitle;
-        //string selectedBookAuthor;
-        //string selectedBookType;
-        //string selectedBookFinished;
         Book selectedBook;
 
         public FormUpdateBook()
@@ -31,7 +27,7 @@ namespace WinFormBooks
         private void FormUpdateBook_Load(object sender, EventArgs e)
         {
             cmbTypeUp.Items.AddRange(new string[] { "nyomtatott", "ebook" });
-            cmbFinishedUp.Items.AddRange(new string[] { "igen", "nem" });
+            cmbFinishedUp.Items.AddRange(new string[] { "igen", "nem"});
             LoadSelectedBookData();
         }
 
@@ -79,43 +75,27 @@ namespace WinFormBooks
 
             // Könyv adatainak módosítása,
             // ha a mezők ki vannak töltve, és történt változtatás
-            if (ValuesAreAppropriate(updatedBook) && ValuesChanged(selectedBook, updatedBook))
+            if (FieldsAreFilled(updatedBook) && ValuesChanged(selectedBook, updatedBook))
             {
                 Program.database.UpdateBook(updatedBook);
                 Program.formBooks.DataGridViewBooksUpdateSearch();
                 this.Close();
             }
-
         }
 
 
 
-
         // Ellenőrzi, hogy a mezők ki vannak-e töltve
-        private bool ValuesAreAppropriate(Book book)
-        {
-            if (book.Title.Equals(""))
-            {
-                BooksMessageBox.Warning("Add meg a címet!");
-                return false;
-            }
-            if (book.Author.Equals(""))
-            {
-                BooksMessageBox.Warning("Add meg a szerzőt!");
-                return false;
-            }
-            if (!book.Type.Equals("nyomtatott") && !book.Type.Equals("ebook"))
-            {
-                BooksMessageBox.Warning("Add meg a típust!");
-                return false;
-            }
-            if (!book.Finished.Equals("igen") && !book.Finished.Equals("nem"))
-            {
-                BooksMessageBox.Warning("Add meg, hogy olvastad-e már a könyvet!");
-                return false;
-            }
+        private bool FieldsAreFilled(Book book)
+        {            
 
+            if (book.Title.Equals("") || book.Author.Equals("") || (!book.Type.Equals("nyomtatott") && !book.Type.Equals("ebook")) || (!book.Finished.Equals("igen") && !book.Finished.Equals("nem")))
+            {
+                BooksMessageBox.Warning("Tölts ki minden mezőt!");
+                return false;
+            }
             return true;
+
         }
 
         // Ellenőrzi, hogy történt-e módosítás

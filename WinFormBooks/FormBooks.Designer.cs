@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBooks));
             this.tableLayoutPanelBooks = new System.Windows.Forms.TableLayoutPanel();
             this.dgvBooks = new System.Windows.Forms.DataGridView();
             this.panelButtons = new System.Windows.Forms.Panel();
@@ -43,9 +44,9 @@
             this.lblAuthor = new System.Windows.Forms.Label();
             this.tbSearchAuthor = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.tbSearchTitle = new System.Windows.Forms.TextBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.tableLayoutPanelBooks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBooks)).BeginInit();
             this.panelButtons.SuspendLayout();
@@ -72,6 +73,8 @@
             // 
             this.dgvBooks.AllowUserToAddRows = false;
             this.dgvBooks.AllowUserToDeleteRows = false;
+            this.dgvBooks.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvBooks.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBooks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBooks.Location = new System.Drawing.Point(33, 33);
@@ -98,49 +101,69 @@
             // 
             this.btnUsers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUsers.BackColor = System.Drawing.Color.White;
+            this.btnUsers.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUsers.Location = new System.Drawing.Point(33, 632);
             this.btnUsers.Name = "btnUsers";
             this.btnUsers.Size = new System.Drawing.Size(152, 60);
             this.btnUsers.TabIndex = 3;
             this.btnUsers.Text = "Felhasználók";
-            this.btnUsers.UseVisualStyleBackColor = true;
+            this.btnUsers.UseVisualStyleBackColor = false;
             this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.BackColor = System.Drawing.Color.White;
+            this.btnClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Location = new System.Drawing.Point(191, 632);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(110, 60);
             this.btnClose.TabIndex = 4;
             this.btnClose.Text = "Bezárás";
-            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnDeleteBook
             // 
             this.btnDeleteBook.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteBook.BackColor = System.Drawing.Color.White;
+            this.btnDeleteBook.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnDeleteBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteBook.Image = global::WinFormBooks.Properties.Resources.icon_delete;
+            this.btnDeleteBook.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDeleteBook.Location = new System.Drawing.Point(33, 511);
             this.btnDeleteBook.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.btnDeleteBook.Name = "btnDeleteBook";
+            this.btnDeleteBook.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
             this.btnDeleteBook.Size = new System.Drawing.Size(268, 60);
             this.btnDeleteBook.TabIndex = 2;
             this.btnDeleteBook.Text = "Könyv törlése";
-            this.btnDeleteBook.UseVisualStyleBackColor = true;
+            this.btnDeleteBook.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnDeleteBook.UseVisualStyleBackColor = false;
             this.btnDeleteBook.Click += new System.EventHandler(this.btnDeleteBook_Click);
             // 
             // btnUpdateBook
             // 
             this.btnUpdateBook.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateBook.BackColor = System.Drawing.Color.White;
+            this.btnUpdateBook.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnUpdateBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateBook.Image = global::WinFormBooks.Properties.Resources.icon_update;
+            this.btnUpdateBook.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnUpdateBook.Location = new System.Drawing.Point(33, 438);
             this.btnUpdateBook.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.btnUpdateBook.Name = "btnUpdateBook";
+            this.btnUpdateBook.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
             this.btnUpdateBook.Size = new System.Drawing.Size(268, 60);
             this.btnUpdateBook.TabIndex = 1;
             this.btnUpdateBook.Text = "Adatok módosítása";
-            this.btnUpdateBook.UseVisualStyleBackColor = true;
+            this.btnUpdateBook.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnUpdateBook.UseVisualStyleBackColor = false;
             this.btnUpdateBook.Click += new System.EventHandler(this.btnUpdateBook_Click);
             // 
             // groupBoxSearch
@@ -168,6 +191,9 @@
             // 
             this.cmbFilterFinished.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbFilterFinished.BackColor = System.Drawing.Color.White;
+            this.cmbFilterFinished.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFilterFinished.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbFilterFinished.FormattingEnabled = true;
             this.cmbFilterFinished.Location = new System.Drawing.Point(5, 270);
             this.cmbFilterFinished.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
@@ -190,6 +216,9 @@
             // 
             this.cmbFilterType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbFilterType.BackColor = System.Drawing.Color.White;
+            this.cmbFilterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFilterType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbFilterType.FormattingEnabled = true;
             this.cmbFilterType.Location = new System.Drawing.Point(6, 200);
             this.cmbFilterType.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
@@ -222,6 +251,7 @@
             // 
             this.tbSearchAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSearchAuthor.BackColor = System.Drawing.Color.White;
             this.tbSearchAuthor.Location = new System.Drawing.Point(6, 132);
             this.tbSearchAuthor.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.tbSearchAuthor.Name = "tbSearchAuthor";
@@ -239,22 +269,40 @@
             this.lblTitle.TabIndex = 6;
             this.lblTitle.Text = "Cím";
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefresh.BackColor = System.Drawing.Color.White;
+            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Image = global::WinFormBooks.Properties.Resources.LucaBurgio_refresh_double14;
+            this.btnRefresh.Location = new System.Drawing.Point(232, 338);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(28, 28);
+            this.btnRefresh.TabIndex = 5;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.BackColor = System.Drawing.Color.White;
+            this.btnSearch.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Location = new System.Drawing.Point(5, 338);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(221, 28);
             this.btnSearch.TabIndex = 4;
             this.btnSearch.Text = "Keresés";
-            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // tbSearchTitle
             // 
             this.tbSearchTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSearchTitle.BackColor = System.Drawing.Color.White;
             this.tbSearchTitle.Location = new System.Drawing.Point(6, 64);
             this.tbSearchTitle.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.tbSearchTitle.Name = "tbSearchTitle";
@@ -262,23 +310,14 @@
             this.tbSearchTitle.TabIndex = 0;
             this.tbSearchTitle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearchTitle_KeyDown);
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Image = global::WinFormBooks.Properties.Resources.LucaBurgio_refresh_double14;
-            this.btnRefresh.Location = new System.Drawing.Point(232, 338);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(28, 28);
-            this.btnRefresh.TabIndex = 5;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // FormBooks
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(193)))), ((int)(((byte)(226)))));
             this.ClientSize = new System.Drawing.Size(944, 761);
             this.Controls.Add(this.tableLayoutPanelBooks);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MinimumSize = new System.Drawing.Size(900, 800);
             this.Name = "FormBooks";

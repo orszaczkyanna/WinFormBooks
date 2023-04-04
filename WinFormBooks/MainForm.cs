@@ -50,6 +50,7 @@ namespace WinFormBooks
                 colId.CellTemplate = new DataGridViewTextBoxCell();
                 colId.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 colId.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                colId.SortMode = DataGridViewColumnSortMode.Automatic;
             }
             dgvUsers.Columns.Add(colId);
 
@@ -60,6 +61,7 @@ namespace WinFormBooks
                 colUsername.Name = "username";
                 colUsername.HeaderText = "Felhasználónév";
                 colUsername.CellTemplate = new DataGridViewTextBoxCell();
+                colUsername.SortMode = DataGridViewColumnSortMode.Automatic;
             }
             dgvUsers.Columns.Add(colUsername);
 
@@ -69,6 +71,7 @@ namespace WinFormBooks
                 colRole.Name = "role";
                 colRole.HeaderText = "Jogosultság";
                 colRole.CellTemplate = new DataGridViewTextBoxCell();
+                colRole.SortMode = DataGridViewColumnSortMode.Automatic;
             }
             dgvUsers.Columns.Add(colRole);
         }
@@ -98,10 +101,10 @@ namespace WinFormBooks
         }
 
 
-        private void dgvUsers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            this.dgvUsers.Sort(this.dgvUsers.Columns[e.ColumnIndex], ListSortDirection.Ascending);
-        }
+        //private void dgvUsers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        //{
+        //    this.dgvUsers.Sort(this.dgvUsers.Columns[e.ColumnIndex], ListSortDirection.Ascending);
+        //}
 
         // Felhasználó(k) keresése keresés gombbal, vagy enterrel
         private void btnSearch_Click(object sender, EventArgs e)
@@ -163,7 +166,7 @@ namespace WinFormBooks
                 {
                     DataGridViewRow selectedRow = dgvUsers.SelectedRows[0];
                     string selectedUsersId = selectedRow.Cells["id"].Value.ToString();
-                    Program.database.DeleteUserOrBook(selectedUsersId, "users", "Felhasználó");
+                    Program.database.DeleteUserOrBook(selectedUsersId, "users", "Felhasználó", "userid");
                     DataGridViewUpdateSearch();
                 }
 
