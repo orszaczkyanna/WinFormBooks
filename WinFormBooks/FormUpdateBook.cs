@@ -15,7 +15,7 @@ namespace WinFormBooks
 
 
         // Kiválasztott könyv
-        static DataGridViewRow selectedRow;
+        //static DataGridViewRow selectedRow;
         uint selectedBookId;
         Book selectedBook;
 
@@ -35,7 +35,7 @@ namespace WinFormBooks
         {
 
             // Kiválasztott könyv adatainak kiolvasása
-            selectedRow = Program.formBooks.dgvBooks.SelectedRows[0];
+            DataGridViewRow selectedRow = Program.formBooks.dgvBooks.SelectedRows[0];
             selectedBookId = Convert.ToUInt32(selectedRow.Cells["id"].Value.ToString());
             string selectedBookTitle = selectedRow.Cells["title"].Value.ToString();
             string selectedBookAuthor = selectedRow.Cells["author"].Value.ToString();

@@ -20,7 +20,7 @@ namespace WinFormBooks
         private void MainForm_Load(object sender, EventArgs e)
         {
             // --- cmbFilter ComboBox elemeinek megadása ---
-            cmbFilter.Items.AddRange(new string[] { "mind", "admin", "felhasználó" });
+            cmbFilter.Items.AddRange(new string[] { "minden jogosultság", "admin", "felhasználó" });
             cmbFilter.SelectedIndex = 0;
 
             // --- dgvUsers DataGridView ---            
@@ -39,7 +39,6 @@ namespace WinFormBooks
             dgvUsers.MultiSelect = false;
             dgvUsers.RowTemplate.Height = 45; // sormagasság
             dgvUsers.RowHeadersWidth = 30; // sor header szélesség
-            //dgvUsers.ColumnHeadersDefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold); // félkövér fejléc
 
             // Oszlopok tulajdonságai
             // 1. oszlop - ID
@@ -48,9 +47,9 @@ namespace WinFormBooks
                 colId.Name = "id";
                 colId.HeaderText = "id";
                 colId.CellTemplate = new DataGridViewTextBoxCell();
+                colId.SortMode = DataGridViewColumnSortMode.Automatic;
                 colId.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 colId.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                colId.SortMode = DataGridViewColumnSortMode.Automatic;
             }
             dgvUsers.Columns.Add(colId);
 
@@ -95,16 +94,11 @@ namespace WinFormBooks
         {
             string usernameSearch = tbSearch.Text;
             string roleFilter = ComboBoxSelectedItem(cmbFilter.SelectedIndex, "admin", "user");
-
-            List<User> usersList = Program.database.SelectedUsersList(usernameSearch, roleFilter);
+            User userSearch = new User(0, usernameSearch, roleFilter);
+            List<User> usersList = Program.database.SelectedUsersList(userSearch);
             DataGridViewUpdate(usersList);
+            
         }
-
-
-        //private void dgvUsers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        //{
-        //    this.dgvUsers.Sort(this.dgvUsers.Columns[e.ColumnIndex], ListSortDirection.Ascending);
-        //}
 
         // Felhasználó(k) keresése keresés gombbal, vagy enterrel
         private void btnSearch_Click(object sender, EventArgs e)
@@ -140,14 +134,14 @@ namespace WinFormBooks
         private void btnUpdateRole_Click(object sender, EventArgs e)
         {
 
-            if (dgvUsers.SelectedRows.Count == 0)
-            {
-                BooksMessageBox.Warning("Nincs kiválasztott felhasználó!");
-            }
-            else
+            if (dgvUsers.SelectedRows.Count == 1)
             {
                 FormUpdateRole formUpdateRole = new FormUpdateRole();
                 formUpdateRole.ShowDialog();
+            }
+            else
+            {
+                BooksMessageBox.WarningNoSelected("felhasználó");
             }
             
 
@@ -155,21 +149,20 @@ namespace WinFormBooks
 
         private void btnDeleteUser_Click(object sender, EventArgs e)
         {
-            if (dgvUsers.SelectedRows.Count == 0)
-            {
-                BooksMessageBox.Warning("Nincs kiválasztott felhasználó!");
-            }
-            else
+            if (dgvUsers.SelectedRows.Count == 1)
             {
                 DialogResult result = BooksMessageBox.YesNo("a felhasználót");
                 if (result.Equals(DialogResult.Yes))
                 {
                     DataGridViewRow selectedRow = dgvUsers.SelectedRows[0];
                     string selectedUsersId = selectedRow.Cells["id"].Value.ToString();
-                    Program.database.DeleteUserOrBook(selectedUsersId, "users", "Felhasználó", "userid");
+                    Program.database.DeleteUserOrBook(selectedUsersId, "users");
                     DataGridViewUpdateSearch();
                 }
-
+            }
+            else
+            {
+                BooksMessageBox.WarningNoSelected("felhasználó");
             }
         }
 

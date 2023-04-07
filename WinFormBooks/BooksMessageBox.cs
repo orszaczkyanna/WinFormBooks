@@ -9,8 +9,6 @@ namespace WinFormBooks
 {
     public class BooksMessageBox
     {
-        //static string MessageBoxCaption = "BooksMessageBox";
-
         public static void Information(string message)
         {
             MessageBox.Show(message, "Sikeres végrehajtás", MessageBoxButtons.OK, MessageBoxIcon.Information);

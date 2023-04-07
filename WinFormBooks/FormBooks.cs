@@ -123,8 +123,9 @@ namespace WinFormBooks
             string authorSearch = tbSearchAuthor.Text;
             string typeFilter = Program.mainForm.ComboBoxSelectedItem(cmbFilterType.SelectedIndex, "nyomtatott", "ebook");
             string finishedFilter = Program.mainForm.ComboBoxSelectedItem(cmbFilterFinished.SelectedIndex, "igen", "nem");
+            Book book = new Book(0, titleSearch, authorSearch, typeFilter, finishedFilter);
 
-            List<Book> booksList = Program.database.SelectedBooksList(titleSearch, authorSearch, typeFilter, finishedFilter);
+            List<Book> booksList = Program.database.SelectedBooksList(book);
             DataGridViewBooksUpdate(booksList);
         }
 
@@ -170,38 +171,35 @@ namespace WinFormBooks
 
         private void btnUpdateBook_Click(object sender, EventArgs e)
         {
-            if (dgvBooks.SelectedRows.Count == 0)
-            {
-                BooksMessageBox.WarningNoSelected("könyv");
-            }
-            else
+            if (dgvBooks.SelectedRows.Count == 1)
             {
                 FormUpdateBook formUpdateBook = new FormUpdateBook();
                 formUpdateBook.ShowDialog();
+            }
+            else
+            {
+                BooksMessageBox.WarningNoSelected("könyv");
             }
         }
 
         private void btnDeleteBook_Click(object sender, EventArgs e)
         {
             
-            if (dgvBooks.SelectedRows.Count == 0)
+            if (dgvBooks.SelectedRows.Count == 1)
             {
-                BooksMessageBox.WarningNoSelected("könyv");
-            }
-            else
-            {
-
                 DialogResult result = BooksMessageBox.YesNo("a könyvet");
 
                 if (result.Equals(DialogResult.Yes))
                 {
                     DataGridViewRow selectedRow = dgvBooks.SelectedRows[0];
                     string selectedBookId = selectedRow.Cells["id"].Value.ToString();
-                    Program.database.DeleteUserOrBook(selectedBookId, "book", "Könyv", "bookid");
+                    Program.database.DeleteUserOrBook(selectedBookId, "book");
                     DataGridViewBooksUpdateSearch();
-
                 }
-
+            }
+            else
+            {
+                BooksMessageBox.WarningNoSelected("könyv");
             }
         }
 

@@ -36,12 +36,13 @@ namespace WinFormBooks
             string password1 = tbPasswordIn1.Text;
             string password2 = tbPasswordIn2.Text;
             string role = RoleToSend(cmbRoleIn.SelectedIndex);
+            User newUser = new User(0, username, role);
 
             // Új felhasználó felvétele
             if (FieldsAreFilled(username, password1, password2, role) && UsernameMinimumLength(username) && UsernameIsSimple(username) && UsernameIsAvailable(username) && PasswordIsComplex(password1) && PasswordMatch(password1, password2))
             {
                 hashedPassword = BCrypt.Net.BCrypt.HashPassword(password1, salt);
-                Program.database.InsertUser(username, hashedPassword, role);
+                Program.database.InsertUser(newUser, hashedPassword);
                 Program.mainForm.DataGridViewUpdateSearch();
                 this.Close();
             }
@@ -66,7 +67,7 @@ namespace WinFormBooks
         private bool FieldsAreFilled(string username, string password1, string password2, string role)
         {
             bool result = true;
-            if (username == "" || password1 == "" || password2 == "" || (!role.Equals("admin") && !role.Equals("user")))
+            if (username.Equals("") || password1.Equals("") || password2.Equals("") || (!role.Equals("admin") && !role.Equals("user")))
             {
                 result = false;
                 BooksMessageBox.Warning("Tölts ki minden mezőt!");
@@ -83,7 +84,7 @@ namespace WinFormBooks
 
             foreach (string username in usernames)
             {
-                if (newUsername == username)
+                if (newUsername.Equals(username))
                 {
                     result = false;
                     BooksMessageBox.Warning("A felhasználónév már foglalt!");
@@ -144,7 +145,7 @@ namespace WinFormBooks
         private bool PasswordMatch(string password1, string password2)
         {
             bool result = false;
-            if (password1 == password2)
+            if (password1.Equals(password2))
             {
                 result = true;
             }

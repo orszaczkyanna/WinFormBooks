@@ -13,6 +13,13 @@ namespace WinFormBooks
 {
     public partial class FormUpdateRole : Form
     {
+
+        // Kiválasztott felhasználó adatai
+        string selectedUserId;
+        string selectedUserName;
+        string selectedUserRole;
+        int selectedRoleIndex;
+
         public FormUpdateRole()
         {
             InitializeComponent();
@@ -22,67 +29,72 @@ namespace WinFormBooks
         {
             cmbRoleUp.Items.AddRange(new string[] { "admin", "felhasználó" });
             cmbRoleUp.Focus();
-
-            // Kiválasztott felhasználó adatainak megjelenítése
             LoadSelectedUserData();
         }
 
         private void LoadSelectedUserData()
         {
-            DataGridViewRow selectedRow = Program.mainForm.dgvUsers.SelectedRows[0];
-            string selectedUserRole = selectedRow.Cells["role"].Value.ToString();
-            string selectedUserName = selectedRow.Cells["username"].Value.ToString();
+            // Kiválasztott felhasználó adatainak kiolvasása
+            DataGridViewRow selectedRow = Program.mainForm.dgvUsers.SelectedRows[0];;
+            selectedUserId = selectedRow.Cells["id"].Value.ToString();
+            selectedUserName = selectedRow.Cells["username"].Value.ToString();
+            selectedUserRole = selectedRow.Cells["role"].Value.ToString();
+            selectedRoleIndex = SelectedRoleIndex(selectedUserRole);
 
+            // Adatok megjelenítése
             tbUsernameUp.Text = selectedUserName;
+            cmbRoleUp.SelectedIndex = selectedRoleIndex;
+
+        }
+
+        // A kiválasztott jogosultság értéke alapján visszaadja a megfelelő indexet
+        private int SelectedRoleIndex(string selectedUserRole)
+        {
             if (selectedUserRole == "admin")
             {
-                cmbRoleUp.SelectedIndex = 0;
+                return 0;
             }
             else
             {
-                cmbRoleUp.SelectedIndex = 1;
+                return 1;
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            // A módosításhoz szükséges adatok
-            DataGridViewRow selectedRow = Program.mainForm.dgvUsers.SelectedRows[0];
-            string selectedUserId = selectedRow.Cells["id"].Value.ToString();
-            string selectedUserRole = selectedRow.Cells["role"].Value.ToString();
+            // Módosított jogosultság
             int updatedRoleIndex = cmbRoleUp.SelectedIndex;
-            string updatedRoleToSend;
-
-            // Jogosultság megnevezésének átalakítása, hogy megfelelő értéket küldjön az adatbázisnak
-            if (updatedRoleIndex == 0)
-            {
-                updatedRoleToSend = "admin";
-            }
-            else
-            {
-                updatedRoleToSend = "user";
-            }
 
 
-            // Megnevezés átalakítása, hogy az eredeti és a módosított jogosultság összehasonlítható legyen
-            if (selectedUserRole.Equals("felhasználó"))
-            {
-                selectedUserRole = "user";
-            }
-
-            // Feltétel vizsgálat: módosult - e a kiválasztott felhasználó jogosultsága?
+            // Feltétel vizsgálat: módosult-e a kiválasztott felhasználó jogosultsága?
             // Ha igen, a módosítás történjen meg
-            if (selectedUserRole.Equals(updatedRoleToSend))
+            if (selectedRoleIndex == updatedRoleIndex)
             {
                 BooksMessageBox.Warning("Nem történt módosítás!");
             }
             else
             {
-                Program.database.UpdateRole(updatedRoleToSend, selectedUserId);
+                string updatedRoleToSend = RenameRoleValue(updatedRoleIndex, "admin", "user");
+                User updatedUser = new User(Convert.ToUInt32(selectedUserId), selectedUserName, updatedRoleToSend);
+                Program.database.UpdateRole(updatedUser);
                 Program.mainForm.DataGridViewUpdateSearch();
                 this.Close();
             }
 
+
+        }
+
+        // Jogosultság megnevezésének átalakítása, hogy megfelelő értéket küldjön az adatbázisnak
+        private string RenameRoleValue(int index, string v1, string v2)
+        {
+            if (index == 0)
+            {
+                return v1;
+            }
+            else
+            {
+                return v2;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

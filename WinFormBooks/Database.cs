@@ -12,8 +12,8 @@ namespace WinFormBooks
     internal class Database
     {
 
-        public MySqlConnection connection = null;
-        public MySqlCommand cmd = null;
+        MySqlConnection connection = null;
+        MySqlCommand cmd = null;
 
         // Konstruktor, adatbázis kapcsolat felépítése
         public Database(string server = "localhost", string database = "books", string userID = "root", string password = "")
@@ -37,7 +37,7 @@ namespace WinFormBooks
             catch (MySqlException ex)
             {
                 connection.Close();
-                BooksMessageBox.Error(ex.Message + "\n\nNem sikerült csatlakozni az adatbázishoz!\nA program leáll!");
+                BooksMessageBox.Error("Nem sikerült csatlakozni az adatbázishoz!\nA program leáll!");
                 Environment.Exit(0);
             }
         }
@@ -47,10 +47,10 @@ namespace WinFormBooks
 
 
         // Metódus, ami visszaadja a keresett felhasználókat; ha nincs keresés, az összeset        
-        public List<User> SelectedUsersList(string usernameSearch, string roleSearch)
+        public List<User> SelectedUsersList(User user)
         {
             List<User> users = new List<User>();
-            cmd.CommandText = $"SELECT userid, username, role FROM users WHERE username LIKE \"%{usernameSearch}%\" AND role LIKE \"%{roleSearch}%\";";
+            cmd.CommandText = $"SELECT userid, username, role FROM users WHERE username LIKE \"%{user.Username}%\" AND role LIKE \"%{user.Role}%\";";
 
             try
             {
@@ -90,7 +90,7 @@ namespace WinFormBooks
             catch (MySqlException ex)
             {
                 connection.Close();
-                BooksMessageBox.Error(ex.Message + "\n\nFelhasználók lekérdezése sikertelen!\nA program leáll!");
+                BooksMessageBox.Error("Felhasználók lekérdezése sikertelen!\nA program leáll!");
                 Environment.Exit(0);
             }
 
@@ -127,16 +127,16 @@ namespace WinFormBooks
 
 
         // Új felhasználó hozzáadása
-        public void InsertUser(string username, string password, string role)
+        public void InsertUser(User newUser, string password)
         {
             try
             {
                 connection.Open();
                 cmd.Parameters.Clear();
                 cmd.CommandText = "INSERT INTO users(userid, username, password, role) VALUES (NULL,@Username,@Password,@Role);";
-                cmd.Parameters.AddWithValue("Username", username);
+                cmd.Parameters.AddWithValue("Username", newUser.Username);
                 cmd.Parameters.AddWithValue("Password", password);
-                cmd.Parameters.AddWithValue("Role", role);
+                cmd.Parameters.AddWithValue("Role", newUser.Role);
                 int affectedRows = cmd.ExecuteNonQuery();
                 IsSuccessfulMessageBox(affectedRows, "Felhasználó felvétele");
                 connection.Close();
@@ -150,15 +150,15 @@ namespace WinFormBooks
         }
 
         // Jogosultság módosítása
-        public void UpdateRole(string role, string id)
+        public void UpdateRole(User user)
         {
             try
             {
                 connection.Open();
                 cmd.Parameters.Clear();
                 cmd.CommandText = "UPDATE users SET role = @role WHERE userid = @id;";
-                cmd.Parameters.AddWithValue("@role", role);
-                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@role", user.Role);
+                cmd.Parameters.AddWithValue("@id", user.Id);
 
                 int affectedRows = cmd.ExecuteNonQuery();
                 IsSuccessfulMessageBox(affectedRows, "Jogosultság módosítása");
@@ -178,10 +178,10 @@ namespace WinFormBooks
         // --------------------- BOOKS ------------------------
 
         // Metódus, ami visszaadja a keresett könyveket; ha nincs keresés, az összeset   
-        public List<Book> SelectedBooksList(string title, string author, string type, string finished)
+        public List<Book> SelectedBooksList(Book book)
         {
             List<Book> books = new List<Book>();
-            cmd.CommandText = $"SELECT bookid, cim, szerzo, tipus, olvasas FROM book WHERE cim LIKE \"%{title}%\" AND szerzo LIKE \"%{author}%\" AND tipus LIKE \"%{type}%\" AND olvasas LIKE \"%{finished}%\";";
+            cmd.CommandText = $"SELECT bookid, cim, szerzo, tipus, olvasas FROM book WHERE cim LIKE \"%{book.Title}%\" AND szerzo LIKE \"%{book.Author}%\" AND tipus LIKE \"%{book.Type}%\" AND olvasas LIKE \"%{book.Finished}%\";";
 
             try
             {
@@ -206,7 +206,7 @@ namespace WinFormBooks
             catch (MySqlException ex)
             {
                 connection.Close();
-                BooksMessageBox.Error(ex.Message + "\n\nKönyvek lekérdezése sikertelen!\nA program leáll!");
+                BooksMessageBox.Error("Könyvek lekérdezése sikertelen!\nA program leáll!");
                 Environment.Exit(0);
             }
 
@@ -264,8 +264,23 @@ namespace WinFormBooks
 
 
         // Felhasználó vagy könyv törlése
-        public void DeleteUserOrBook(string id, string tableName, string typeName, string idFieldName)
+        public void DeleteUserOrBook(string id, string tableName)
         {
+            
+            string messageText = string.Empty;
+            string idFieldName = string.Empty;
+
+            if (tableName.Equals("users"))
+            {
+                messageText = "Felhasználó";
+                idFieldName = "userid";
+            }
+            else if (tableName.Equals("book"))
+            {
+                messageText = "Könyv";
+                idFieldName = "bookid";
+            }
+
             try
             {
                 connection.Open();
@@ -274,7 +289,7 @@ namespace WinFormBooks
                 cmd.Parameters.AddWithValue("@id", id);
 
                 int affectedRows = cmd.ExecuteNonQuery();
-                IsSuccessfulMessageBox(affectedRows, $"{typeName} törlése");
+                IsSuccessfulMessageBox(affectedRows, $"{messageText} törlése");
 
                 connection.Close();
 
@@ -286,14 +301,10 @@ namespace WinFormBooks
                 switch (ex.Number)
                 {
                     case 1451:
-                        if (typeName.Equals("Könyv"))
-                        {
-                            BooksMessageBox.Error("A könyv nem törölhető, mivel kölcsönben van.");
-                        }
-                        else
-                        {
-                            BooksMessageBox.Error("A felhasználó nem törölhető, mivel kölcsönvett könyv van nála.");
-                        }                       
+                        BorrowedBookErrorMessage(tableName);
+                        break;
+                    case 1064:
+                        BooksMessageBox.Error("A program nemlétező adattáblából próbál törölni.\nA művelet sikertelen.");
                         break;
                     default:
                         BooksMessageBox.Error(ex.Message);
@@ -302,5 +313,16 @@ namespace WinFormBooks
             }
         }
 
+        private void BorrowedBookErrorMessage(string tableName)
+        {
+            if (tableName.Equals("book"))
+            {
+                BooksMessageBox.Error("A könyv nem törölhető, mivel kölcsönben van.");
+            }
+            else if (tableName.Equals("users"))
+            {
+                BooksMessageBox.Error("A felhasználó nem törölhető, mivel kölcsönvett könyv van nála.");
+            }
+        }
     }
 }
