@@ -207,7 +207,7 @@ namespace WinFormBooks
 
         private void btnUsers_Click(object sender, EventArgs e)
         {
-            Program.mainForm.Show();
+            Program.mainForm.ShowForm(Program.mainForm);
             this.Hide();
         }
 

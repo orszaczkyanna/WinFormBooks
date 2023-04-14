@@ -84,7 +84,7 @@ namespace WinFormBooks
 
             foreach (string username in usernames)
             {
-                if (newUsername.Equals(username))
+                if (newUsername.ToLower().Equals(username.ToLower()))
                 {
                     result = false;
                     BooksMessageBox.Warning("A felhasználónév már foglalt!");

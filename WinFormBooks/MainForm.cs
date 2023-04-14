@@ -168,7 +168,7 @@ namespace WinFormBooks
 
         private void btnBooks_Click(object sender, EventArgs e)
         {
-            Program.formBooks.Show();
+            ShowForm(Program.formBooks);
             this.Hide();
         }
 
@@ -206,7 +206,23 @@ namespace WinFormBooks
             }
         }
 
+        // A megjelenő ablak vegye fel az előző ablak helyét és méretét
+        public void ShowForm(Form form)
+        {
+            if (WindowState == FormWindowState.Maximized)
+            {
+                form.WindowState = WindowState;
+            }
+            else
+            {
+                form.WindowState = FormWindowState.Normal;
+                form.StartPosition = FormStartPosition.Manual;
+                form.Location = Location;
+                form.Size = Size;                
+            }
 
+            form.Show();
+        }
 
     }
 }

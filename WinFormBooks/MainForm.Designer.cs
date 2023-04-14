@@ -61,7 +61,7 @@
             this.tableLayoutPanelMain.Padding = new System.Windows.Forms.Padding(30);
             this.tableLayoutPanelMain.RowCount = 1;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(944, 571);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(944, 761);
             this.tableLayoutPanelMain.TabIndex = 0;
             // 
             // dgvUsers
@@ -75,7 +75,7 @@
             this.dgvUsers.Location = new System.Drawing.Point(33, 33);
             this.dgvUsers.Name = "dgvUsers";
             this.dgvUsers.ReadOnly = true;
-            this.dgvUsers.Size = new System.Drawing.Size(524, 505);
+            this.dgvUsers.Size = new System.Drawing.Size(524, 695);
             this.dgvUsers.TabIndex = 0;
             // 
             // panelButtons
@@ -90,7 +90,7 @@
             this.panelButtons.Location = new System.Drawing.Point(563, 33);
             this.panelButtons.Name = "panelButtons";
             this.panelButtons.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.panelButtons.Size = new System.Drawing.Size(348, 505);
+            this.panelButtons.Size = new System.Drawing.Size(348, 695);
             this.panelButtons.TabIndex = 1;
             // 
             // btnBooks
@@ -100,7 +100,7 @@
             this.btnBooks.BackColor = System.Drawing.Color.White;
             this.btnBooks.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.btnBooks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBooks.Location = new System.Drawing.Point(33, 442);
+            this.btnBooks.Location = new System.Drawing.Point(33, 632);
             this.btnBooks.Name = "btnBooks";
             this.btnBooks.Size = new System.Drawing.Size(196, 60);
             this.btnBooks.TabIndex = 4;
@@ -114,7 +114,7 @@
             this.btnClose.BackColor = System.Drawing.Color.White;
             this.btnClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(235, 442);
+            this.btnClose.Location = new System.Drawing.Point(235, 632);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(110, 60);
             this.btnClose.TabIndex = 5;
@@ -257,7 +257,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(193)))), ((int)(((byte)(226)))));
-            this.ClientSize = new System.Drawing.Size(944, 571);
+            this.ClientSize = new System.Drawing.Size(944, 761);
             this.Controls.Add(this.tableLayoutPanelMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
